@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&family=Pacifico&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Josefin Sans", sans-serif;
+
+}
+
+body {
+    background-color: #E7EBEE;
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    height: 81px;
+    display: flex;
+    align-items: center;
+    padding-inline: 20px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header div b {
+    color: black;
+    text-transform: uppercase;
+}
+
+nav {
+    width: 40%;
+    font-weight: 900;
+}
+
+main {
+    display: flex;
+    width: 100%;
+
+}
+
+form {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: 730px;
+    margin: 10px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    padding-inline: 10px;
+    border-radius: 6px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+aside {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: 50%;
+    margin: 10px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+}
+
+.align-label-input {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 20px;
+
+}
+
+.create-account {
+    padding-top: 20px;
+}
+
+.alignment-horizontal {
+    display: flex;
+    width: 100%;
+}
+
+.create-account-button {
+    display: flex;
+    margin-top: 20px;
+    padding-inline: 20px;
+    width: 380px;
+    justify-content: space-between;
+}
+
+.create-account-button button {
+    padding-block: 12px;
+    width: 160px;
+    cursor: pointer;
+    border: none;
+    background-color: #3A434D;
+    color: white;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.align-label-input label {
+    color: black;
+    margin-top: 10px;
+}
+
+.align-label-input input {
+    color: #3A434D;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-size: 16px;
+    padding-bottom: 10px;
+    border: 2px solid transparent;
+    border-bottom-color: black;
+    width: 310px;
+}
+
+.align-label-input input:focus {
+    outline: none;
+}
+
+.create-account-heading {
+    display: flex;
+    border: 2px solid transparent;
+    border-bottom-color: black;
+    width: 94%;
+    margin-left: 20px;
+}
+
+.create-account-box {
+    margin-right: 10px;
+    height: 15px;
+    width: 16px;
+    border-radius: 2px;
+    background-color: #3456AB;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+}
+
+
+#heading-subtitle {
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #3A434D;
+}
+
+#heading-title {
+    height: 22px;
+    display: flex;
+    align-items: center;
+}
+
+.chekbox-link-alignment {
+    padding-left: 20px;
+    margin-top: -8px;
+}
+
+.checkbox-alignment {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    margin-top: 10px;
+    margin-left: 29%;
+}
+
+.checkbox-alignment input {
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
+
+footer {
+    background-color: white;
+    color: #3A434D;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    height: 80px;
+    margin-inline: 10px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

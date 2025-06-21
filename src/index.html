@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protecting Agriculture Land From Animals/Theft</title>
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body>
+  <header>
+    <div><b>Protecting Agriculture Land From Animals/Theft</b></div>
+
+    <nav>
+      <div class="nav_mobile"></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="">Help</a></li>
+        <li><a href="">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h1> HELLO I AM YOUR SECURITY GUARD,</h1>
+      <br>
+      ❐ Protecting Agriculture Land from Animals/Theft is a smart system that helps farmers guard their fields from
+      animals and intruders. <br><br>
+      ❐ It detects threats in real-time, captures images, sends mobile alerts, and sounds an alarm
+      to scare them away. <br><br>
+      ❐ With a simple web interface, farmers can easily monitor their land remotely and
+      reduce crop loss.
+      <br><br>
+      <br>
+      <div class="home_button">
+        <button class="button-30" id="LoginAccount">Login</button>
+        <button class="button-30" id="createAccount">Create Account</button>
+      </div>
+
+    </article>
+    <aside>
+      <div class="column">
+        <div><img class="icon_adjust_c" src="../src/assets/icons/Camera_Icon.webp"></div>
+        <div><img class="icon_adjust_s" src="../src/assets/icons/Contact_Us.webp"></div>
+      </div>
+
+      <div class="column">
+        <div><img class="icon_adjust_c" src="../src/assets/icons/Device_Icon.webp"></div>
+        <div><img class="icon_adjust" src="../src/assets/icons/Monitor_Icon.webp"></div>
+      </div>
+
+      <div class="column">
+        <div id="Heading">Let's Connect Us ...  ✨</div>
+      </div>
+    </aside>
+  </main>
+  <footer></footer>
+  <script>
+      let createAccount = document.getElementById("createAccount");
+     
+      let LoginAccount = document.getElementById("LoginAccount");
+
+      if (createAccount) {
+        createAccount.addEventListener("click", function () {
+          location.href = "../src/pages/Create_Account.html";
+        });
+      }
+
+      if (LoginAccount) {
+        LoginAccount.addEventListener("click", function () {
+          location.href = "../src/pages/Login_Account.html";
+        });
+      }
+    </script>
+</body>
+
+</html>
