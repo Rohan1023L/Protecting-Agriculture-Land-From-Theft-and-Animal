@@ -1,21 +1,19 @@
 <?php
 session_start();
 
-// 🚫 Prevent browser from caching
-header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
-header("Pragma: no-cache"); // HTTP 1.0
-header("Expires: 0"); // Proxies
+header("Cache-Control: no-cache, no-store, must-revalidate"); 
+header("Pragma: no-cache"); 
+header("Expires: 0"); 
 
-// 🔐 Block access if not logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: Login_Account.html");
     exit();
 }
 
-// 🛢 DB connection
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$password = 'Rohan1023L';
 $database = 'protecting_agriculture_land_form_thef_animal';
 
 $conn = new mysqli($host, $user, $password, $database);
@@ -23,7 +21,6 @@ if ($conn->connect_error) {
     die("Database error: " . $conn->connect_error);
 }
 
-// 🎯 Fetch user info
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM user_profile WHERE id = ?";
 $stmt = $conn->prepare($sql);
@@ -34,6 +31,9 @@ $user = $result->fetch_assoc();
 
 $stmt->close();
 $conn->close();
+
+$imageRelativePath = str_replace('..', '', $user['image_path']); 
+$displayImagePath = '/' . ltrim($imageRelativePath, '/'); 
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +73,8 @@ $conn->close();
                 <div class="user-profile-management">
                     <br>
                     <div>
-                        <div class="user-profile" style="background: url('<?php echo htmlspecialchars($user['image_path']); ?>');background-size:100% 100%;"></div>
+<div class="user-profile" style="background: url('<?php echo htmlspecialchars($displayImagePath); ?>'); background-size: 100% 100%;"></div>
+
                         <br>
                     </div>
 

@@ -2,41 +2,46 @@
 // Database config
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$password = 'Rohan1023L';
 $database = 'protecting_agriculture_land_form_thef_animal';
 
 $conn = new mysqli($host, $user, $password, $database);
-
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 // Sanitize input
-$name = $_POST['name'] ?? '';
-$mobile = $_POST['mobile'] ?? '';
-$email = $_POST['email'] ?? '';
-$stream_link = $_POST['stream_link'] ?? '';
+$name = trim($_POST['name'] ?? '');
+$mobile = trim($_POST['mobile'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$stream_link = trim($_POST['stream_link'] ?? '');
 $password_plain = $_POST['password'] ?? '';
+
+if (!$name || !$mobile || !$email || !$password_plain) {
+    die("Please fill all required fields.");
+}
+
 $hashed_password = password_hash($password_plain, PASSWORD_DEFAULT);
 
 // Handle image upload
 $image_path = null;
-if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
+if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
     $allowedTypes = ['image/jpeg', 'image/png'];
     $fileType = mime_content_type($_FILES['profileImage']['tmp_name']);
 
     if (in_array($fileType, $allowedTypes)) {
-        $targetDir = "../upload/profiles/";
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
+        $targetDir = '/var/www/html/src/upload/profiles/';
+        if (!is_dir($targetDir)) {
+            if (!mkdir($targetDir, 0775, true)) {
+                die("Failed to create upload directory.");
+            }
         }
 
         $imageName = time() . "_" . basename($_FILES['profileImage']['name']);
         $targetFilePath = $targetDir . $imageName;
 
         if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $targetFilePath)) {
-            $image_path = $targetFilePath;
+            $image_path = '/src/upload/profiles/' . $imageName;
         } else {
             die("Failed to upload image.");
         }
@@ -50,7 +55,7 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssss", $name, $mobile, $email, $stream_link, $hashed_password, $image_path);
 
 if ($stmt->execute()) {
-    header("Location: ../pages/Dashboard.php"); // Fixed redirection path
+    header("Location: ../pages/Dashboard.php");
     exit();
 } else {
     echo "Error: " . $stmt->error;

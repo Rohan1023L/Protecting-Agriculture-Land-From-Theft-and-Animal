@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 $host = 'localhost';
 $user = 'root';
-$password = '';
+$password = 'Rohan1023L';
 $database = 'protecting_agriculture_land_form_thef_animal';
 
 $conn = new mysqli($host, $user, $password, $database);
