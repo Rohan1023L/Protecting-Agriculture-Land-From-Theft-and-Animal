@@ -3,7 +3,7 @@
 $host = 'localhost';
 $user = 'root';
 $password = '';
-$database = 'protecting_agriculture_land_form_thef_animal'; // Change to your DB name
+$database = 'protecting_agriculture_land_form_thef_animal';
 
 $conn = new mysqli($host, $user, $password, $database);
 
@@ -13,11 +13,11 @@ if ($conn->connect_error) {
 }
 
 // Sanitize input
-$name = $_POST['name'];
-$mobile = $_POST['mobile'];
-$email = $_POST['email'];
-$stream_link = $_POST['stream_link'];
-$password_plain = $_POST['password'];
+$name = $_POST['name'] ?? '';
+$mobile = $_POST['mobile'] ?? '';
+$email = $_POST['email'] ?? '';
+$stream_link = $_POST['stream_link'] ?? '';
+$password_plain = $_POST['password'] ?? '';
 $hashed_password = password_hash($password_plain, PASSWORD_DEFAULT);
 
 // Handle image upload
@@ -27,7 +27,7 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
     $fileType = mime_content_type($_FILES['profileImage']['tmp_name']);
 
     if (in_array($fileType, $allowedTypes)) {
-        $targetDir = "uploads/";
+        $targetDir = "../upload/profiles/";
         if (!file_exists($targetDir)) {
             mkdir($targetDir, 0777, true);
         }
@@ -45,14 +45,12 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === 0) {
     }
 }
 
-// Insert into database
 $sql = "INSERT INTO user_profile (name, mobile, email, stream_link, password, image_path) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssss", $name, $mobile, $email, $stream_link, $hashed_password, $image_path);
 
 if ($stmt->execute()) {
-    // Redirect to success HTML
-    header("Location: Dashboard.html");
+    header("Location: ../pages/Dashboard.php"); // Fixed redirection path
     exit();
 } else {
     echo "Error: " . $stmt->error;

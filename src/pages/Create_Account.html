@@ -10,6 +10,8 @@
 
 
 <body>
+
+
   <header>
     <div><b>Protecting Agriculture Land From Animals/Theft</b></div>
 
@@ -23,7 +25,7 @@
     </nav>
   </header>
   <main>
-    <form action="php/Create_Account.php" method="POST" enctype="multipart/form-data">
+    <form action="../php/Create_Account.php" method="POST" enctype="multipart/form-data">
       <div class="create-account-heading">
         <div class="box">
           <div class="create-account-box"></div>
@@ -42,8 +44,7 @@
           <div class="user-profile"></div>
           <div class="user-profile-upload">
             <div>
-              <input type="file" accept="image/png, image/jpeg" name="profileImage"><br>
-              <button>Upload Photo</button>
+              <input type="file" accept="image/png, image/jpg, image/jpeg" name="profileImage">
             </div>
 
 
@@ -106,7 +107,7 @@
       </div>
 
       <div class="create-account-button">
-        <button>Create Account</button>
+        <button type="submit">Create Account</button>
         <button id="ReturnHome">Cancel</button>
 
         <script>
@@ -119,15 +120,71 @@
       </div>
 
     </form>
-    <aside>
-      <img src="../assets/images/RaspberryPi.jpg" id="imgSet">
 
-      <div>
-        <br>
-        <br>
-        <b><u>Fig.</u> <u>Control</u> <u>System</u> <u>( PALFA/T )</u></b>
+    <aside>
+      <div class="create-account-heading">
+        <div class="box">
+          <div class="create-account-box"></div>
+        </div>
+
+
+        <div class="heading-title-subtitle">
+          <div id="heading-title"><b>PROJECT COMPONENTS OVERVIEW</b></div>
+          <div id="heading-subtitle">HERE YOU CAN SEE THE COMPONENTS WE HAVE USED IN THIS PROJECT.</div>
+        </div>
+      </div>
+
+      <div class="all-card">
+
+        <div class="overview-card">
+          <div id="card-image"><img src="../assets/images/RaspberryPi.png"></div>
+          <div id="card-discription">
+            <div id="h4">Raspberry Pi</div>
+            <hr class="new1">
+            <div id="card-image-description">Acts as the central processing unit to control and manage all
+              components.
+            </div>
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <div id="card-image"><img src="../assets/images/Camera.png"></div>
+          <div id="card-discription">
+            <div id="h4">Camera Module</div>
+            <hr class="new1">
+            <div id="card-image-description">Captures real-time video footage for surveillance and
+              monitoring.
+            </div>
+
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <div id="card-image"><img src="../assets/images/Speaker.png"></div>
+          <div id="card-discription">
+            <div id="h4">Speaker Module</div>
+            <hr class="new1">
+            <div id="card-image-description">Delivers audible alerts to deter intruders or animals.
+            </div>
+
+          </div>
+        </div>
+
+        <div class="overview-card">
+          <div id="card-image"><img src="../assets/images/Farmer.png"></div>
+          <div id="card-discription">
+            <div id="h4">Farmer's Handset</div>
+            <hr class="new1">
+            <div id="card-image-description">
+              Receives alerts and live updates for remote monitoring and response.
+            </div>
+
+          </div>
+        </div>
       </div>
     </aside>
+
+    
   </main>
   <footer>
     © 2025 DSY TEAM, Protecting Agriculture Land From Animals/Theft.

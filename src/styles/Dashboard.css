@@ -60,10 +60,38 @@ form {
 }
 
 .user-profile {
+    margin-top: 15px;
     margin-left: 20px;
-    height: 100px;
-    width: 100px;
+    height: 110px;
+    width: 105px;
     border: 1px solid black;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.user-details-n-e-p {
+    margin-left: 20px;
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+.user-details-n-e-p>div {
+    margin-bottom: 10px;
+}
+
+#user-profile-button {
+    border: 1p solid black;
+    background-color: transparent;
+    padding-inline: 30px;
+    padding-block: 8px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
 }
 
 .control-hardware-navigation {
@@ -172,12 +200,56 @@ aside {
 .text-propmt textarea {
     padding: 10px;
     width: 98%;
+    border: 1.5px solid black;
+    border-radius: 6px;
+}
+
+.button-adjust-ment {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+
+.text-propmt .i {
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    height: 40px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .live-farm-view,
 .voice-massage {
-    padding-block: 20px;
-    margin-block: 10px;
+    padding-top: 20px;
+}
+
+.live-stream-video {
+    display: flex;
+    margin-top: 14px;
+}
+
+.live-video-footage {
+    margin-left: 20px;
+}
+
+.live-video-text-analysis {
+    margin-right: 40px;
+}
+
+.live-stream-video .live-video-footage {
+    border: 1px solid red;
+    height: 250px;
+    width: 60%;
+}
+
+.live-stream-video .live-video-text-analysis {
+    border: 1px solid red;
+
+    width: 40%;
 }
 
 #text-propmt-button {
@@ -188,14 +260,14 @@ aside {
     background-color: white;
     text-transform: uppercase;
     font-size: 12px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
 }
 
 .live-farm-view {
     margin-top: -0px;
+}
+
+.user-profile-management {
+    display: flex;
 }
 
 footer {
@@ -206,10 +278,6 @@ footer {
     margin-inline: 10px;
     border-radius: 6px;
     margin-bottom: 10px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
