@@ -14,103 +14,105 @@
         <div><b>Protecting Agriculture Land From Animals/Theft</b></div>
 
         <nav>
-            <div class="nav_mobile"></div>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="">Help</a></li>
-                <li><a href="">About Us</a></li>
-            </ul>
+
         </nav>
     </header>
     <main>
         <form>
-            <div class="create-account-heading">
-                <div class="box">
-                    <div class="create-account-box"></div>
+            <div class="user-details">
+                <div class="create-account-heading">
+                    <div class="box">
+                        <div class="create-account-box"></div>
+                    </div>
+
+                    <div class="heading-title-subtitle">
+                        <div id="heading-title"><b>CREATE ACCOUNT</b></div>
+                        <div id="heading-subtitle">PROFILE INFORMATION</div>
+                    </div>
                 </div>
 
-
-                <div class="heading-title-subtitle">
-                    <div id="heading-title"><b>LOGIN IN ACCOUNT</b></div>
-                    <div id="heading-subtitle">Welcome! BACK FILL DETAILS TO PROCED.</div>
+                <div><br>
+                    <div class="user-profile"></div>
                 </div>
             </div>
 
-            <div class="create-account">
-
-                <div class="alignment-horizontal">
-                    <div class="align-label-input">
-                        <label for="Name">Name</label>
-                        <input type="text" id="Name" placeholder="Enter Your Name">
+            <div class="index-selection-for-choose">
+                <div class="create-account-heading">
+                    <div class="box">
+                        <div class="create-account-box"></div>
                     </div>
 
-                    <div class="align-label-input">
-                        <label for="Email">Email ID</label>
-                        <input type="email" id="Email" placeholder="Enter Your Email Address">
-                    </div>
-
-                </div>
-
-                <div class="alignment-horizontal">
-
-                    <div class="align-label-input">
-                        <label for="MobileNumber">Mobile No</label>
-                        <input type="number" id="MobileNumber" placeholder="Enter Your Mobile Number">
-                    </div>
-                    <div class="align-label-input">
-                        <label for="Password">Password</label>
-                        <input type="password" id="Password" name="Password" placeholder="Enter Your Password">
+                    <div class="heading-title-subtitle">
+                        <div id="heading-title"><b>INDEX</b></div>
+                        <div id="heading-subtitle">SELECT YOUR NEEDS</div>
                     </div>
                 </div>
 
-                <div class="alignment-horizontal">
-                    <div class="chekbox-link-alignment">
-                        <br>
-                        <a href="">Forget Password ?</a>
-                    </div>
-
-
-                    <div class="checkbox-alignment">
-                        <input type="checkbox" id="checkbox">
-                        <label for="checkbox">Show Password</label>
-
-                        <script>
-                            const checkbox = document.getElementById("checkbox");
-                            const passwordInput = document.getElementById("Password");
-
-                            checkbox.addEventListener("change", function () {
-                                if (this.checked) {
-                                    passwordInput.type = "text";
-                                } else {
-                                    passwordInput.type = "password";
-                                }
-                            });
-                        </script>
+                <div>
+                    <div class="control-hardware-navigation">
+                        <button>live farm view</button>
+                        <button>vice massage</button>
+                        <button>camera images [ by ai ]</button>
                     </div>
                 </div>
-
             </div>
 
-            <div class="create-account-button">
-                <button>Login Account</button>
-                <button id="ReturnHome">Cancel</button>
-
-                <script>
-                    const indexHtml = document.getElementById('ReturnHome');
-                    indexHtml.addEventListener('click', function () {
-                        event.preventDefault();
-                        location.href = '../index.html';
-                    })
-                </script>
-            </div>
 
         </form>
         <aside>
 
+            <div class="live-farm-view">
+                <div class="create-account-heading">
+                    <div class="box">
+                        <div class="create-account-box"></div>
+                    </div>
+
+                    <div class="heading-title-subtitle">
+                        <div id="heading-title"><b>LIVE FARM VIEW</b></div>
+                        <div id="heading-subtitle">HERE YOU EXPLORE THE FARM.</div>
+                    </div>
+                </div>
+
+                <div class="live-stream-video"></div>
+            </div>
+
+            <div class="voice-massage">
+                <div class="create-account-heading">
+                    <div class="box">
+                        <div class="create-account-box"></div>
+                    </div>
+
+                    <div class="heading-title-subtitle">
+                        <div id="heading-title"><b>VICE MASSAGE</b></div>
+                        <div id="heading-subtitle">SEND ALERT TO THE ANIMAL/THEFT.</div>
+                    </div>
+                </div>
+
+                <div class="text-propmt">
+                    <textarea placeholder="Type something or use mic" rows="4"></textarea>
+                    <br>
+                    <button id="text-propmt-button">Send</button>
+                </div>
+            </div>
+
+            <div class="camera-captured-images">
+                <div class="create-account-heading">
+                    <div class="box">
+                        <div class="create-account-box"></div>
+                    </div>
+
+                    <div class="heading-title-subtitle">
+                        <div id="heading-title"><b>CAMERA IMAGES [ BY AI ]</b></div>
+                        <div id="heading-subtitle">ACTIVITY THAT’S CAPTURED IN CAMERA</div>
+                    </div>
+                </div>
+            </div>
+
         </aside>
     </main>
     <footer>
-        © 2025 DSY TEAM, Protecting Agriculture Land From Animals/Theft.
+
+        © 2025 TEAM DSY, Protecting Agriculture Land From Animals/Theft.
         <br>All Rights Reserved.
     </footer>
 </body>

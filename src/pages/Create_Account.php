@@ -23,7 +23,7 @@
     </nav>
   </header>
   <main>
-    <form>
+    <form action="php/Create_Account.php" method="POST" enctype="multipart/form-data">
       <div class="create-account-heading">
         <div class="box">
           <div class="create-account-box"></div>
@@ -42,33 +42,35 @@
           <div class="user-profile"></div>
           <div class="user-profile-upload">
             <div>
-              <input type="file" accept="png,jpg"><br>
+              <input type="file" accept="image/png, image/jpeg" name="profileImage"><br>
               <button>Upload Photo</button>
             </div>
+
+
           </div>
         </div>
 
         <div class="alignment-horizontal">
           <div class="align-label-input">
             <label for="Name">Name</label>
-            <input type="text" id="Name" placeholder="Enter Your Name">
+            <input type="text" id="Name" name="name" placeholder="Enter Your Name">
           </div>
 
           <div class="align-label-input">
             <label for="MobileNumber">Mobile No</label>
-            <input type="number" id="MobileNumber" placeholder="Enter Your Mobile Number">
+            <input type="number" id="MobileNumber" name="mobile" placeholder="Enter Your Mobile Number">
           </div>
         </div>
 
         <div class="alignment-horizontal">
           <div class="align-label-input">
             <label for="Email">Email ID</label>
-            <input type="email" id="Email" placeholder="Enter Your Email Address">
+            <input type="email" id="Email" name="email" placeholder="Enter Your Email Address">
           </div>
 
           <div class="align-label-input">
             <label for="BoxLabel">Stream Link</label>
-            <input type="text" id="BoxLabel" placeholder="Enter The Generated link">
+            <input type="text" id="BoxLabel" name="stream_link" placeholder="Enter The Generated link">
           </div>
         </div>
 
@@ -76,7 +78,7 @@
 
           <div class="align-label-input">
             <label for="Password">Password</label>
-            <input type="password" id="Password" name="Password" placeholder="Enter Your Password">
+            <input type="password" id="Password" name="password" placeholder="Enter Your Password">
           </div>
 
           <div class="checkbox-alignment">
@@ -120,8 +122,10 @@
     <aside>
       <img src="../assets/images/RaspberryPi.jpg" id="imgSet">
 
-      <div cl>
-        <br>Fig. Control System
+      <div>
+        <br>
+        <br>
+        <b><u>Fig.</u> <u>Control</u> <u>System</u> <u>( PALFA/T )</u></b>
       </div>
     </aside>
   </main>
@@ -129,6 +133,8 @@
     © 2025 DSY TEAM, Protecting Agriculture Land From Animals/Theft.
     <br>All Rights Reserved.
   </footer>
+
+  <script src="../utils/userProfile.js"></script>
 </body>
 
 </html>

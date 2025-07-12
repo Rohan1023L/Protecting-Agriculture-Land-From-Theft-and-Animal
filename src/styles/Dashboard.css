@@ -5,7 +5,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Josefin Sans", sans-serif;
-
 }
 
 body {
@@ -30,25 +29,25 @@ header div b {
     text-transform: uppercase;
 }
 
-nav {
-    width: 40%;
-    font-weight: 900;
-}
-
 main {
     display: flex;
     width: 100%;
-
 }
 
 form {
+    width: 500px;
+    padding-top: 12px;
+    padding-inline: 10px;
+
+}
+
+.user-details,
+.index-selection-for-choose {
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    width: 730px;
-    margin: 10px;
+    padding-inline: 10px;
     padding-top: 20px;
     padding-bottom: 40px;
-    padding-inline: 10px;
     border-radius: 6px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -56,76 +55,79 @@ form {
     -o-border-radius: 10px;
 }
 
-aside {
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    width: 50%;
-    margin: 10px;
-    border-radius: 6px;
+.index-selection-for-choose {
+    margin-top: 10px;
+}
+
+.user-profile {
+    margin-left: 20px;
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+.control-hardware-navigation {
+    padding-top: 20px;
+    padding-inline: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.control-hardware-navigation>button {
+    margin: 6px;
+    color: #3A434D;
+    padding-block: 12px;
+    padding-inline: 20px;
+    width: 230px;
+    border: 5px solid transparent;
+    border-left-color: #3A434D;
+    font-weight: bold;
+    background-color: transparent;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: left;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
     -o-border-radius: 6px;
 }
 
-.align-label-input {
-    display: flex;
-    flex-direction: column;
+.control-hardware-navigation>button:hover,
+.control-hardware-navigation>button:active,
+.control-hardware-navigation>button:focus {
+    margin: 6px;
+    padding-block: 12px;
     padding-inline: 20px;
+    color: black;
+    width: 230px;
+    border: 5px solid transparent;
+    border-left-color: #3456AB;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: left;
+}
 
+aside {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    width: 66%;
+    padding-left: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    height: 600px;
+    overflow-y: auto;
 }
 
 .create-account {
     padding-top: 20px;
-}
-
-.alignment-horizontal {
-    display: flex;
-    width: 100%;
-}
-
-.create-account-button {
-    display: flex;
-    margin-top: 20px;
-    padding-inline: 20px;
-    width: 380px;
-    justify-content: space-between;
-}
-
-.create-account-button button {
-    padding-block: 12px;
-    width: 160px;
-    cursor: pointer;
-    border: none;
-    background-color: #3A434D;
-    color: white;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
-    font-size: 12px;
-    text-transform: uppercase;
-}
-
-.align-label-input label {
-    color: black;
-    margin-top: 10px;
-}
-
-.align-label-input input {
-    color: #3A434D;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    font-size: 16px;
-    padding-bottom: 10px;
-    border: 2px solid transparent;
-    border-bottom-color: black;
-    width: 310px;
-}
-
-.align-label-input input:focus {
-    outline: none;
 }
 
 .create-account-heading {
@@ -148,7 +150,6 @@ aside {
     -o-border-radius: 2px;
 }
 
-
 #heading-subtitle {
     font-weight: 400;
     font-size: 12px;
@@ -163,33 +164,48 @@ aside {
     align-items: center;
 }
 
-.chekbox-link-alignment {
-    padding-left: 20px;
-    margin-top: -8px;
+.text-propmt {
+    padding-inline: 20px;
+    padding-top: 20px;
 }
 
-.checkbox-alignment {
-    display: flex;
-    align-items: flex-start;
-    padding-bottom: 14px;
-    padding-left: 20px;
-    margin-top: 10px;
-    margin-left: 29%;
+.text-propmt textarea {
+    padding: 10px;
+    width: 98%;
 }
 
-.checkbox-alignment input {
-    height: 16px;
-    width: 16px;
-    margin-right: 10px;
+.live-farm-view,
+.voice-massage {
+    padding-block: 20px;
+    margin-block: 10px;
+}
+
+#text-propmt-button {
+    padding-inline: 40px;
+    padding-block: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.live-farm-view {
+    margin-top: -0px;
 }
 
 footer {
     background-color: white;
     color: #3A434D;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    height: 80px;
+    height: 50px;
     margin-inline: 10px;
     border-radius: 6px;
+    margin-bottom: 10px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
     -ms-border-radius: 6px;
@@ -199,4 +215,5 @@ footer {
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-inline: 20px;
 }
