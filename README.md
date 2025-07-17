@@ -20,10 +20,16 @@
   6. BLUETOOTH SPEAKER
   7. CAMERA MODULE 5MP OR 8MP
 
-# Project Software and Languages
-  Fornt-End : HTML, CSS, JAVASCRIPT, Python(flask)
-  Back-End  : Python, Javascript(node.js, Express.js)
-  DBMS      : Firebase
+# Project Languages
+  1. Front-End : HTML, CSS, JAVASCRIPT
+  2. Back-End  : Python, Javascript
+  3. DBMS      : MySQL (XAMPP), FireBase
+
+# Project Libraries
+ 1. flask (Hosting Live Stream In browser)
+ 2. OpenCV (Capturing camera input)
+ 3. picamera2 (using camera module using csi)
+ 4. v4lutils (for checking device compatibility)
 
 # Project Team Members
   1. Akshay P. Badalwar

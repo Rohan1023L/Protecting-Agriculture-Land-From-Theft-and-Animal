@@ -1,0 +1,37 @@
+PROGRAM CODE :
+from picamera2 import Picamera2
+import cv2
+from flask import Flask, Response
+
+app = Flask(_name_)
+
+picam2 = Picamera2()
+picam2.start()
+
+def generate_frames():
+    while True:
+        frame = picam2.capture_array()
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame_bytes = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/')
+def index():
+    return '''
+    <html><body>
+    <h1>Pi Camera Live Stream</h1>
+    <img src="/video_feed" width="640" height="480" />
+    </body></html>
+    '''
+
+if _name_ == '_main_':
+    app.run(host='0.0.0.0', port=5000)
+
+PROGRAM HOST LINK :
+http://10.30.94.182:5000/PALFAT

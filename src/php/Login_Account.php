@@ -2,38 +2,42 @@
 session_start();
 header('Content-Type: application/json');
 
+// Database config
 $host = 'localhost';
 $user = 'root';
-$password = 'Rohan1023L';
+$password = '';
 $database = 'protecting_agriculture_land_form_thef_animal';
 
+// Connect to database
 $conn = new mysqli($host, $user, $password, $database);
 if ($conn->connect_error) {
-    echo json_encode(['success' => false, 'message' => '❌ Database connection failed.']);
+    echo json_encode(['success' => false, 'message' => '? Database connection failed.']);
     exit();
 }
 
-$name = isset($_POST['Name']) ? trim($_POST['Name']) : '';
+// Get POST data
 $email = isset($_POST['Email']) ? trim($_POST['Email']) : '';
-$mobile = isset($_POST['MobileNumber']) ? trim($_POST['MobileNumber']) : '';
 $password_input = isset($_POST['Password']) ? $_POST['Password'] : '';
 
-if (empty($name) || empty($email) || empty($mobile) || empty($password_input)) {
-    echo json_encode(['success' => false, 'message' => '⚠️ Please fill all fields.']);
+// Check if fields are empty
+if (empty($email) || empty($password_input)) {
+    echo json_encode(['success' => false, 'message' => '?? Please fill all fields.']);
     exit();
 }
 
-$sql = "SELECT * FROM user_profile WHERE name=? AND email=? AND mobile=?";
+// Prepare and execute query
+$sql = "SELECT * FROM user_profile WHERE email=?";
 $stmt = $conn->prepare($sql);
 if (!$stmt) {
-    echo json_encode(['success' => false, 'message' => '❌ Server error.']);
+    echo json_encode(['success' => false, 'message' => '? Server error.']);
     exit();
 }
 
-$stmt->bind_param('sss', $name, $email, $mobile);
+$stmt->bind_param('s', $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
+// Check result
 if ($result->num_rows === 1) {
     $user = $result->fetch_assoc();
 
@@ -41,12 +45,12 @@ if ($result->num_rows === 1) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['name'] = $user['name'];
 
-        echo json_encode(['success' => true, 'message' => '✅ Login successful ! wait ...']);
+        echo json_encode(['success' => true, 'message' => '? Login successful! Redirecting...']);
     } else {
-        echo json_encode(['success' => false, 'message' => '❌ Incorrect password.']);
+        echo json_encode(['success' => false, 'message' => '? Incorrect password.']);
     }
 } else {
-    echo json_encode(['success' => false, 'message' => '❌ User not found with provided credentials.']);
+    echo json_encode(['success' => false, 'message' => '? Email not found.']);
 }
 
 $stmt->close();
