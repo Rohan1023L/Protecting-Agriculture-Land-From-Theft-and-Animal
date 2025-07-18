@@ -24,15 +24,16 @@
   <main>
     <article>
       <h1> HELLO I AM YOUR SECURITY GUARD,</h1>
-      <br>
-      ❐ Protecting Agriculture Land from Animals/Theft is a smart system that helps farmers guard their fields from
-      animals and intruders. <br><br>
-      ❐ It detects threats in real-time, captures images, sends mobile alerts, and sounds an alarm
-      to scare them away. <br><br>
-      ❐ With a simple web interface, farmers can easily monitor their land remotely and
-      reduce crop loss.
-      <br><br>
-      <br>
+
+      <div class="info-text-arrange">
+        ❐ Protecting Agriculture Land from Animals/Theft is a smart system that helps farmers guard their fields from
+        animals and intruders. <br><br>
+        ❐ It detects threats in real-time, captures images, sends mobile alerts, and sounds an alarm
+        to scare them away. <br><br>
+        ❐ With a simple web interface, farmers can easily monitor their land remotely and
+        reduce crop loss.
+      </div>
+
       <div class="home_button">
         <button class="button-30" id="LoginAccount">Login</button>
         <button class="button-30" id="createAccount">Create Account</button>
@@ -51,28 +52,28 @@
       </div>
 
       <div class="column">
-        <div id="Heading">Let's Connect Us ...  ✨</div>
+        <div id="Heading">Let's Connect Us ... ✨</div>
       </div>
     </aside>
   </main>
   <footer></footer>
   <script>
-      let createAccount = document.getElementById("createAccount");
-     
-      let LoginAccount = document.getElementById("LoginAccount");
+    let createAccount = document.getElementById("createAccount");
 
-      if (createAccount) {
-        createAccount.addEventListener("click", function () {
-          location.href = "../src/pages/Create_Account.html";
-        });
-      }
+    let LoginAccount = document.getElementById("LoginAccount");
 
-      if (LoginAccount) {
-        LoginAccount.addEventListener("click", function () {
-          location.href = "../src/pages/Login_Account.html";
-        });
-      }
-    </script>
+    if (createAccount) {
+      createAccount.addEventListener("click", function () {
+        location.href = "../src/pages/Create_Account.html";
+      });
+    }
+
+    if (LoginAccount) {
+      LoginAccount.addEventListener("click", function () {
+        location.href = "../src/pages/Login_Account.html";
+      });
+    }
+  </script>
 </body>
 
 </html>

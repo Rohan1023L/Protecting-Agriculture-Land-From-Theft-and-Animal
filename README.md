@@ -30,6 +30,7 @@
  2. OpenCV (Capturing camera input)
  3. picamera2 (using camera module using csi)
  4. v4lutils (for checking device compatibility)
+ 5. ultralytics (for object detection)
 
 # Project Team Members
   1. Akshay P. Badalwar

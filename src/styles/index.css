@@ -181,12 +181,12 @@ main aside .column>div {
   width: 68%;
 }
 
-.column .icon_adjust_s{
+.column .icon_adjust_s {
   height: 74%;
   width: 68%;
 }
 
-.column div{
+.column div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -204,8 +204,88 @@ main aside .column>div {
   cursor: pointer;
 }
 
-.column #Heading{
+.column #Heading {
   width: 370px;
   height: 40px;
   color: black;
 }
+
+/* Mobile */
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  body {
+    background-image: url("../assets/images/mobile.jpg");
+  }
+
+  header b {
+    font-size: 14px;
+    color: black;
+    font-weight: 600;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  main article,
+  aside {
+    width: 94%;
+  }
+
+
+  main article h1 {
+    font-size: 14px;
+    margin-left: 5px;
+
+  }
+
+  main article .info-text-arrange {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: white;
+  }
+
+  .home_button {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+  }
+
+  #LoginAccount {
+    margin-right: 10px;
+  }
+
+  main aside {
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+  }
+
+  main aside .column>div {
+    margin-left: 10px;
+    height: 90px;
+    width: 100px;
+  }
+
+  .column #Heading {
+    width: 210px;
+    height: 40px;
+    color: black;
+    font-size: 12px;
+  }
+
+
+
+}
+
+/* Tablet */
+/* Laptop and Dekstop */
+/* 4K */

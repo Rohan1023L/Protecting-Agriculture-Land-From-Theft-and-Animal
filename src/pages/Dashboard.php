@@ -124,12 +124,36 @@ if (!$user) {
                 </div>
 
                 <div class="live-stream-video">
+
                     <div class="live-video-footage">
-                        <iframe
-                            id="liveStreamFrame"
-                            src="<?php echo htmlspecialchars($user['stream_link']); ?>">
-                        </iframe>
+                        <img id="liveStreamFrame" src="http://10.30.94.70:5001/live" />
+                        <!--Laptop Ip-->
                     </div>
+
+                    <div class="detected-img">
+                        <img id="detected-frame" src="http://10.30.94.70:5001/latest" />
+                    </div>
+
+                    <script>
+                        function refreshDetectedFrame() {
+                            const img = document.getElementById("detected-frame");
+                            const timestamp = new Date().getTime();
+                            const newSrc = "http://10.30.94.70:5001/latest?rand=" + timestamp;
+
+                            const tempImg = new Image();
+                            tempImg.onload = function() {
+                                img.src = newSrc;
+                            };
+                            // Optional: handle error fallback (e.g., image not yet available)
+                            tempImg.onerror = function() {
+                                console.warn("No new detection image yet.");
+                            };
+                            tempImg.src = newSrc;
+                        }
+
+                        setInterval(refreshDetectedFrame, 5000); // Refresh every 5 seconds
+                    </script>
+
 
                 </div>
             </div>

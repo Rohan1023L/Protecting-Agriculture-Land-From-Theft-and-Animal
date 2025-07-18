@@ -45,12 +45,12 @@ if ($result->num_rows === 1) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['name'] = $user['name'];
 
-        echo json_encode(['success' => true, 'message' => '? Login successful! Redirecting...']);
+        echo json_encode(['success' => true, 'message' => 'Login successful! Welcome ...S']);
     } else {
-        echo json_encode(['success' => false, 'message' => '? Incorrect password.']);
+        echo json_encode(['success' => false, 'message' => 'Incorrect password.']);
     }
 } else {
-    echo json_encode(['success' => false, 'message' => '? Email not found.']);
+    echo json_encode(['success' => false, 'message' => 'Email not found.']);
 }
 
 $stmt->close();
