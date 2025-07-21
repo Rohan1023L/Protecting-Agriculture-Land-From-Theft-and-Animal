@@ -1,48 +1,88 @@
 <?php
 session_start();
 
-// Prevent browser from caching this page
+// Prevent caching
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Check if the user is logged in
+// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: Login_Account.html");
     exit();
 }
 
-// Database connection
+// DB connection info
 $host = 'localhost';
 $user = 'root';
 $password = '';
 $database = 'protecting_agriculture_land_form_thef_animal';
 
+// Connect to DB
 $conn = new mysqli($host, $user, $password, $database);
 if ($conn->connect_error) {
     die("Database error: " . $conn->connect_error);
 }
 
-// Fetch user data
-$userId = $_SESSION['user_id'];
+$userId = (int)$_SESSION['user_id'];
+$table_name = "captured_images_user_" . $userId;
+
+// Handle delete request
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_id'])) {
+    $deleteId = intval($_POST['delete_id']);
+
+    // Get image path before deleting from DB
+    $stmt = $conn->prepare("SELECT image_path FROM `$table_name` WHERE id = ?");
+    $stmt->bind_param("i", $deleteId);
+    $stmt->execute();
+    $stmt->bind_result($imagePath);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Delete image file from disk
+    if ($imagePath) {
+        // Resolve absolute path
+        $fullPath = __DIR__ . '/' . $imagePath;
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
+    }
+
+    // Delete DB record
+    $stmt = $conn->prepare("DELETE FROM `$table_name` WHERE id = ?");
+    $stmt->bind_param("i", $deleteId);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to avoid resubmission
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Fetch user profile info
 $sql = "SELECT * FROM user_profile WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
-
-// Close DB connection
 $stmt->close();
-$conn->close();
 
-// If user not found, log out
 if (!$user) {
     session_destroy();
     header("Location: Login_Account.html");
     exit();
 }
+
+// Fetch captured images for user
+$sql_images = "SELECT id, image_path, captured_at FROM `$table_name` ORDER BY captured_at DESC";
+$result_images = $conn->query($sql_images);
+
+$base_url = "../upload/capture/";
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -103,16 +143,16 @@ if (!$user) {
 
                 <div>
                     <div class="control-hardware-navigation">
-                        <button>live farm view</button>
-                        <button>voice massage</button>
-                        <button>camera images [ by ai ]</button>
+                        <a href="#index-live">live farm view</a>
+                        <a href="#index-voice">voice massage</a>
+                        <a href="#index-img">camera images [ by ai ]</a>
                     </div>
                 </div>
             </div>
         </form>
 
         <aside>
-            <div class="live-farm-view">
+            <div class="live-farm-view" id="index-live">
                 <div class="create-account-heading">
                     <div class="box">
                         <div class="create-account-box"></div>
@@ -126,39 +166,28 @@ if (!$user) {
                 <div class="live-stream-video">
 
                     <div class="live-video-footage">
-                        <img id="liveStreamFrame" src="http://10.30.94.70:5001/live" />
+                        <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>" />
                         <!--Laptop Ip-->
                     </div>
 
                     <div class="detected-img">
-                        <img id="detected-frame" src="http://10.30.94.70:5001/latest" />
+                        <img id="detected-frame"
+                            src="http://10.30.94.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
                     </div>
 
                     <script>
-                        function refreshDetectedFrame() {
-                            const img = document.getElementById("detected-frame");
-                            const timestamp = new Date().getTime();
-                            const newSrc = "http://10.30.94.70:5001/latest?rand=" + timestamp;
-
-                            const tempImg = new Image();
-                            tempImg.onload = function() {
-                                img.src = newSrc;
-                            };
-                            // Optional: handle error fallback (e.g., image not yet available)
-                            tempImg.onerror = function() {
-                                console.warn("No new detection image yet.");
-                            };
-                            tempImg.src = newSrc;
-                        }
-
-                        setInterval(refreshDetectedFrame, 5000); // Refresh every 5 seconds
+                        setInterval(() => {
+                            const img = document.getElementById('detected-frame');
+                            const userId = <?= $_SESSION['user_id'] ?>;
+                            img.src = `http://10.30.94.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                        }, 5000);
                     </script>
 
 
                 </div>
             </div>
 
-            <div class="voice-massage">
+            <div class="voice-massage"  id="index-voice">
                 <div class="create-account-heading">
                     <div class="box">
                         <div class="create-account-box"></div>
@@ -177,7 +206,7 @@ if (!$user) {
                     </div>
                 </div>
 
-                <div class="camera-captured-images">
+                <div class="camera-captured-images" id="index-img">
                     <div class="create-account-heading">
                         <div class="box">
                             <div class="create-account-box"></div>
@@ -186,6 +215,71 @@ if (!$user) {
                             <div id="heading-title"><b>CAMERA IMAGES [ BY AI ]</b></div>
                             <div id="heading-subtitle">ACTIVITY THAT’S CAPTURED IN CAMERA</div>
                         </div>
+                    </div>
+
+                    <div class="ai-captured-images">
+                        <div class="table-ai-captured-img">
+                            <div class="sr-img">
+                                SR.NO
+                            </div>
+
+                            <div class="ai-img">
+                                CAPTURED IMAGES
+                            </div>
+
+                            <div class="modify-button">
+                                MORE DETAILS
+                            </div>
+                        </div>
+                        <?php
+                        if (!$result_images || $result_images->num_rows === 0) {
+                            echo '<div style="height:40px;display:flex;align-items:center;justify-content:center;">No captured images found.</div>';
+                        } else {
+                            $sr_no = 1;
+                            $base_url = "../upload/capture/";
+
+                            while ($row = $result_images->fetch_assoc()) {
+                                $img_id = $row['id'];
+                                $img_path = $row['image_path']; // e.g., detected_21072025_123456.jpg
+                                $captured_at = $row['captured_at'];
+                                $filename = basename($img_path);
+                                $full_img_url = $base_url . $filename;
+                        ?>
+                                <div style="display: flex;">
+                                    <div class="sr-img" style="display: flex; justify-content: center;margin-left: 20px;border: 1px solid black;width:9.60%;align-items: center;"><?= $sr_no ?></div>
+
+                                    <div class="ai-img" style="display: flex; justify-content: center;border: 1px solid black;align-items: center;width:48%;">
+                                        <img
+                                            src="<?= htmlspecialchars($full_img_url) ?>"
+                                            alt="Captured Image <?= $sr_no ?>"
+                                            style="width:40%;height:98%;"
+                                            title="Captured at <?= htmlspecialchars($captured_at) ?>" />
+                                    </div>
+
+                                    <div class="modify-button" style="display: flex;align-items:center;justify-content:center; border: 1px solid black;width:38.4%;">
+
+                                        <!-- View button -->
+                                        <center> <a href="<?= htmlspecialchars($full_img_url) ?>" target="_blank">
+                                                <button type="button" style="padding: 5px 10px;margin-top:12px;">View</button>
+                                            </a>
+
+                                            <!-- Delete form -->
+
+                                            <form method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
+                                                <input type="hidden" name="delete_id" value="<?= $img_id ?>">
+                                                <button type="submit" style="padding: 5px 10px; background-color: red; color: white;">Delete</button>
+                                            </form>
+                                        </center>
+
+                                    </div>
+
+                                </div>
+                        <?php
+                                $sr_no++;
+                            }
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -198,3 +292,7 @@ if (!$user) {
 </body>
 
 </html>
+
+<?php
+$conn->close();
+?>

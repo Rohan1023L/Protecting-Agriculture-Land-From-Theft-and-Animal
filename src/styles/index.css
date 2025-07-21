@@ -81,6 +81,10 @@ main article {
 
 }
 
+.info-text-arrange {
+  padding-block: 26px;
+}
+
 .home_button button {
   width: 160px;
   cursor: pointer;
@@ -212,14 +216,14 @@ main aside .column>div {
 
 /* Mobile */
 @media (min-width: 320px) and (max-width: 480px) {
-  
+
   body {
     background-image: url("../assets/images/mobile.jpg");
   }
 
   header b {
     font-size: 14px;
-    color: black;
+    color: white;
     font-weight: 600;
   }
 
@@ -252,7 +256,7 @@ main aside .column>div {
   }
 
   .home_button {
-    margin-top: 30px;
+    margin-block: 30px;
     width: 100%;
     display: flex;
   }
@@ -278,14 +282,85 @@ main aside .column>div {
   .column #Heading {
     width: 210px;
     height: 40px;
-    color: black;
+    color: white;
     font-size: 12px;
   }
-
-
-
 }
 
 /* Tablet */
+@media (min-width: 481px) and (max-width: 767px) {
+  body {
+    background-image: url("../assets/images/mobile.jpg");
+  }
+
+  header b {
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  main article,
+  aside {
+    width: 94%;
+  }
+
+
+  main article h1 {
+    font-size: 18px;
+    margin-left: 5px;
+    color: white;
+  }
+
+  main article .info-text-arrange {
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: white;
+  }
+
+  .home_button {
+    margin-block: 30px;
+    width: 100%;
+    display: flex;
+  }
+
+  #LoginAccount {
+    margin-right: 10px;
+  }
+
+  main aside {
+    margin-top: 20px;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+  }
+
+  main aside .column>div {
+    margin-left: 10px;
+    height: 100px;
+    width: 120px;
+  }
+
+  .column #Heading {
+    width: 250px;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+}
+
+
 /* Laptop and Dekstop */
 /* 4K */
