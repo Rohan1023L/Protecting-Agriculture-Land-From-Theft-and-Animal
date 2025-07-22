@@ -209,9 +209,36 @@ aside {
     display: flex;
 }
 
-.camera-captured-images{
-     margin-top: 20px;
+.camera-captured-images {
+    padding-top: 20px;
 }
+
+.button-arrangment-for-url #button-for-url {
+    height: 36px;
+    background-color: transparent;
+    color: black;
+    width: 160px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#button-for-url:hover {
+    background-color: #00FA9A;
+    color: black;
+}
+
+#button-arrangment-for-delete {
+    height: 36px;
+
+    width: 160px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#button-arrangment-for-delete:hover {
+    background-color: #F25E86;
+}
+
 
 
 .text-propmt .i {
@@ -283,13 +310,13 @@ aside {
     padding-block: 20px;
 }
 
-.table-ai-captured-img{
+.table-ai-captured-img {
     width: 96%;
     margin-left: 20px;
     display: flex;
 }
 
-.table-ai-captured-img>div{
+.table-ai-captured-img>div {
     border: 1px solid black;
     display: flex;
     align-items: center;
@@ -297,16 +324,16 @@ aside {
     height: 40px;
 }
 
-.sr-img{
+.sr-img {
     width: 10%;
-    
+
 }
 
-.ai-img{
+.ai-img {
     width: 50%;
 }
 
-.modify-button{
+.modify-button {
     width: 40%;
 }
 

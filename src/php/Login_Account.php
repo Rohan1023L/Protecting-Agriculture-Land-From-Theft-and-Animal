@@ -45,7 +45,7 @@ if ($result->num_rows === 1) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['name'] = $user['name'];
 
-        echo json_encode(['success' => true, 'message' => 'Login successful! Welcome ...S']);
+        echo json_encode(['success' => true, 'message' => 'Login successful! Welcome ...!']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Incorrect password.']);
     }

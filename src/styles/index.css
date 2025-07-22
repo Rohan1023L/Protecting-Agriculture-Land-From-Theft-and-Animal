@@ -227,8 +227,59 @@ main aside .column>div {
     font-weight: 600;
   }
 
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header div {
+    width: 80%;
+  }
+
+  nav {
+    width: 10%;
+  }
+
   nav ul {
     display: none;
+  }
+
+  .nav_mobile {
+    display: block;
+  }
+
+  .container {
+    display: inline-block;
+    justify-content: end;
+    cursor: pointer;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 35px;
+    height: 4px;
+    border-radius: 8px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+
+  .change .bar2 {
+    opacity: 0;
+  }
+
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
   }
 
   main {
@@ -282,7 +333,7 @@ main aside .column>div {
   .column #Heading {
     width: 210px;
     height: 40px;
-    color: white;
+    color: black;
     font-size: 12px;
   }
 }
@@ -301,6 +352,61 @@ main aside .column>div {
 
   nav ul {
     display: none;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  header div {
+    width: 80%;
+  }
+
+  nav {
+    width: 10%;
+  }
+
+  nav ul {
+    display: none;
+  }
+
+  .nav_mobile {
+    display: block;
+  }
+
+  .container {
+    display: inline-block;
+    justify-content: end;
+    cursor: pointer;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 35px;
+    height: 4px;
+    border-radius: 8px;
+    background-color: white;
+    margin: 6px 0;
+    transition: 0.4s;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+
+  .change .bar2 {
+    opacity: 0;
+  }
+
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
   }
 
   main {
@@ -363,4 +469,156 @@ main aside .column>div {
 
 
 /* Laptop and Dekstop */
+
+@media (min-width: 768px) and (max-width: 790px) {
+  header b {
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  main article,
+  aside {
+    width: 94%;
+  }
+
+
+  main article h1 {
+    font-size: 18px;
+    margin-left: 5px;
+    color: white;
+  }
+
+  main article .info-text-arrange {
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: white;
+  }
+
+  .home_button {
+    margin-block: 30px;
+    width: 100%;
+    display: flex;
+  }
+
+  #LoginAccount {
+    margin-right: 10px;
+  }
+
+  main aside {
+    margin-top: 20px;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+  }
+
+  main aside .column>div {
+    margin-left: 10px;
+    height: 100px;
+    width: 120px;
+  }
+
+  .column #Heading {
+    width: 250px;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  header b {
+    font-size: 18px;
+    color: white;
+    font-weight: 600;
+  }
+
+
+  main {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  main article,
+  aside {
+    width: 94%;
+  }
+
+
+  main article h1 {
+    font-size: 18px;
+    margin-left: 5px;
+    color: white;
+  }
+
+  main article .info-text-arrange {
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: white;
+  }
+
+  .home_button {
+    margin-block: 30px;
+    width: 100%;
+    display: flex;
+  }
+
+  #LoginAccount {
+    margin-right: 10px;
+  }
+
+  main aside {
+    margin-top: 20px;
+    height: 310px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+  }
+
+  main aside .column>div {
+    margin-left: 10px;
+    height: 100px;
+    width: 120px;
+  }
+
+  .column #Heading {
+    width: 250px;
+    height: 40px;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 26px;
+  }
+}
+
+@media (min-width:1400px) and (max-width:2000px) {
+  header {
+    padding-inline: 4%;
+  }
+
+  article {
+    margin-left: 3%;
+  }
+}
+
 /* 4K */
+
+@media (min-width:2000px) and (max-width:4000px) {
+  header {
+    padding-inline: 7%;
+  }
+
+  article {
+    margin-left: 6%;
+  }
+}

@@ -31,6 +31,7 @@
  3. picamera2 (using camera module using csi)
  4. v4lutils (for checking device compatibility)
  5. ultralytics (for object detection)
+ 6. PHP Mailer
 
 # Project Team Members
   1. Akshay P. Badalwar

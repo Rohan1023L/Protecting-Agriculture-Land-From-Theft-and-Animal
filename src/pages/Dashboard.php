@@ -187,7 +187,7 @@ $base_url = "../upload/capture/";
                 </div>
             </div>
 
-            <div class="voice-massage"  id="index-voice">
+            <div class="voice-massage" id="index-voice">
                 <div class="create-account-heading">
                     <div class="box">
                         <div class="create-account-box"></div>
@@ -259,15 +259,21 @@ $base_url = "../upload/capture/";
                                     <div class="modify-button" style="display: flex;align-items:center;justify-content:center; border: 1px solid black;width:38.4%;">
 
                                         <!-- View button -->
-                                        <center> <a href="<?= htmlspecialchars($full_img_url) ?>" target="_blank">
-                                                <button type="button" style="padding: 5px 10px;margin-top:12px;">View</button>
-                                            </a>
+                                        <center>
+                                            <div class="button-arrangment-for-url">
+                                                <a href="<?= htmlspecialchars($full_img_url) ?>" target="_blank">
+                                                    <button type="button" id="button-for-url"> <i class="fa-solid fa-eye"></i>&nbsp;View Image</button>
+                                                   
+                                                </a>
+                                            </div>
 
                                             <!-- Delete form -->
 
                                             <form method="POST" onsubmit="return confirm('Are you sure you want to delete this image?');">
                                                 <input type="hidden" name="delete_id" value="<?= $img_id ?>">
-                                                <button type="submit" style="padding: 5px 10px; background-color: red; color: white;">Delete</button>
+                                                <div>
+                                                    <button type="submit" id="button-arrangment-for-delete"><i class="fa-solid fa-trash"></i> Delete Image</button>
+                                                </div>
                                             </form>
                                         </center>
 

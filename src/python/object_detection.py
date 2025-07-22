@@ -7,6 +7,7 @@ import time
 from datetime import datetime
 import mysql.connector
 import io
+import requests  # <-- added for sending POST request to PHP
 
 app = Flask(__name__)
 
@@ -26,6 +27,8 @@ lock = threading.Lock()
 frame_skip = 2
 min_area = 3000
 save_interval = 5  # seconds
+last_email_sent_time = 0
+email_interval = 30  # seconds
 
 # MySQL config
 DB_HOST = 'localhost'
@@ -64,7 +67,8 @@ def get_user_stream_link(user_id):
 
 
 def insert_captured_image_to_db(image_path):
-    global current_user_id
+    global current_user_id, last_email_sent_time
+
     if not current_user_id:
         print("[ERROR] No user_id set for this request")
         return
@@ -91,10 +95,25 @@ def insert_captured_image_to_db(image_path):
         cursor.close()
         conn.close()
         print(f"[DB] Inserted image with blob into {table_name}: {relative_path}")
+
+        now = time.time()
+        if now - last_email_sent_time >= email_interval:
+            try:
+                php_url = "http://localhost/Capstone_Project/Protecting-Agriculture-Land-From-Theft-and-Animal/src/php/Send_Image_Email.php"
+                post_data = {"user_id": current_user_id}
+                response = requests.post(php_url, data=post_data)
+                print(f"[EMAIL] PHP Response: {response.text}")
+                last_email_sent_time = now  
+            except Exception as e:
+                print(f"[EMAIL ERROR] {e}")
+        else:
+            print(f"[EMAIL] Skipped: Waiting {int(email_interval - (now - last_email_sent_time))}s before next email.")
+
     except mysql.connector.Error as err:
         print(f"[DB ERROR] Failed to insert image: {err}")
     except Exception as e:
         print(f"[ERROR] {e}")
+
 
 
 def detect_objects():
@@ -138,7 +157,7 @@ def detect_objects():
                     filename = f"detected_{timestamp_for_file}.jpg"
                     latest_frame_path = os.path.join(snapshot_dir, filename)
 
-                    timestamp_for_img = datetime.now().strftime("Date : %d/%m/%Y Time : %H:%M:%S TEAM DSY")
+                    timestamp_for_img =  datetime.now().strftime("Date : %d/%m/%Y Time : %I:%M:%S %p TEAM DSY")
                     cv2.putText(clean_frame, timestamp_for_img, (10, clean_frame.shape[0] - 10),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
@@ -244,4 +263,3 @@ def get_latest_frame():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=False, threaded=True)
-
