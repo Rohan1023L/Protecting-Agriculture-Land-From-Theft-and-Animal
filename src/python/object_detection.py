@@ -7,7 +7,7 @@ import time
 from datetime import datetime
 import mysql.connector
 import io
-import requests  # <-- added for sending POST request to PHP
+import requests
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ app = Flask(__name__)
 model = YOLO("yolov8n.pt")
 LABELS = model.model.names
 
-# Snapshot storage folder (still saving files locally as backup)
+# Snapshot storage folder
 snapshot_dir = "../upload/capture"
 os.makedirs(snapshot_dir, exist_ok=True)
 
@@ -41,7 +41,6 @@ detection_started = False
 current_user_id = None
 cap = None
 
-
 def get_user_stream_link(user_id):
     try:
         conn = mysql.connector.connect(
@@ -64,7 +63,6 @@ def get_user_stream_link(user_id):
     except Exception as e:
         print(f"[DB ERROR] Failed to fetch stream link: {e}")
         return None
-
 
 def insert_captured_image_to_db(image_path):
     global current_user_id, last_email_sent_time
@@ -99,7 +97,7 @@ def insert_captured_image_to_db(image_path):
         now = time.time()
         if now - last_email_sent_time >= email_interval:
             try:
-                php_url = "http://localhost/Capstone_Project/Protecting-Agriculture-Land-From-Theft-and-Animal/src/php/Send_Image_Email.php"
+                php_url = "http://localhost/Web Project/Protecting-Agriculture-Land-From-Theft-and-Animal/src/php/Send_Image_Email.php"
                 post_data = {"user_id": current_user_id}
                 response = requests.post(php_url, data=post_data)
                 print(f"[EMAIL] PHP Response: {response.text}")
@@ -113,7 +111,6 @@ def insert_captured_image_to_db(image_path):
         print(f"[DB ERROR] Failed to insert image: {err}")
     except Exception as e:
         print(f"[ERROR] {e}")
-
 
 
 def detect_objects():
@@ -146,6 +143,15 @@ def detect_objects():
                     cls_id = int(box.cls[0])
                     label = LABELS.get(cls_id, "object")
 
+                    # 🚨 Send alert to Raspberry Pi if specific objects are detected
+                    if label in ["person", "dog", "cow"]:
+                        try:
+                            alert_url = "http://10.158.251.182:5000/alert"
+                            requests.post(alert_url, data={"type": label})
+                            print(f"[ALERT] Sent alert to Raspberry Pi for {label}")
+                        except Exception as e:
+                            print(f"[ALERT ERROR] Could not send alert: {e}")
+
                     area = (x2 - x1) * (y2 - y1)
                     if area < min_area:
                         continue
@@ -157,7 +163,7 @@ def detect_objects():
                     filename = f"detected_{timestamp_for_file}.jpg"
                     latest_frame_path = os.path.join(snapshot_dir, filename)
 
-                    timestamp_for_img =  datetime.now().strftime("Date : %d/%m/%Y Time : %I:%M:%S %p TEAM DSY")
+                    timestamp_for_img = datetime.now().strftime("Date : %d/%m/%Y Time : %I:%M:%S %p TEAM DSY")
                     cv2.putText(clean_frame, timestamp_for_img, (10, clean_frame.shape[0] - 10),
                                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
@@ -177,11 +183,13 @@ def detect_objects():
 
 def generate_stream():
     global current_frame
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]  # Faster encoding
+
     while True:
         with lock:
             if current_frame is None:
                 continue
-            ret, buffer = cv2.imencode('.jpg', current_frame)
+            ret, buffer = cv2.imencode('.jpg', current_frame, encode_param)
             frame = buffer.tobytes()
 
         yield (b'--frame\r\n'
@@ -203,8 +211,9 @@ def video_feed():
 
     current_user_id = user_id
 
-    # Initialize video capture
     cap = cv2.VideoCapture(stream_link)
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Reduce latency
+
     if not cap.isOpened():
         return "Failed to open video stream", 500
 
@@ -263,3 +272,4 @@ def get_latest_frame():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=False, threaded=True)
+
