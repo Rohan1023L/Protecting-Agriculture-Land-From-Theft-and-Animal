@@ -9,7 +9,7 @@
   1. Alert Notification ( user device )
   2. Live Stream of Agriculture Land ( Agriculture Land live stream visible in website )
   3. Text to Speech ( creating noise for animals and voice massage for theft )
-  4. Theft/Animal Captured Images
+  4. Theft/Animal Captured Images ( visible in web as well as send the massage via email )
 
 # Project Hardware Components
   1. RASPBERRY PI 4 MODEL-B
