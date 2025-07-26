@@ -237,51 +237,6 @@ main aside .column>div {
     width: 80%;
   }
 
-  nav {
-    width: 10%;
-  }
-
-  nav ul {
-    display: none;
-  }
-
-  .nav_mobile {
-    display: block;
-  }
-
-  .container {
-    display: inline-block;
-    justify-content: end;
-    cursor: pointer;
-  }
-
-  .bar1,
-  .bar2,
-  .bar3 {
-    width: 35px;
-    height: 4px;
-    border-radius: 8px;
-    background-color: white;
-    margin: 6px 0;
-    transition: 0.4s;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-  }
-
-  .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
-  }
-
-  .change .bar2 {
-    opacity: 0;
-  }
-
-  .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-  }
-
   main {
     display: flex;
     flex-direction: column-reverse;
@@ -292,11 +247,9 @@ main aside .column>div {
     width: 94%;
   }
 
-
   main article h1 {
     font-size: 14px;
     margin-left: 5px;
-
   }
 
   main article .info-text-arrange {
@@ -471,6 +424,7 @@ main aside .column>div {
 /* Laptop and Dekstop */
 
 @media (min-width: 768px) and (max-width: 790px) {
+
   header b {
     font-size: 18px;
     color: white;

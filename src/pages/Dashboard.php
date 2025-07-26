@@ -172,14 +172,14 @@ $base_url = "../upload/capture/";
 
                     <div class="detected-img">
                         <img id="detected-frame"
-                            src="http://10.30.94.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
+                            src="http://10.158.251.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
                     </div>
 
                     <script>
                         setInterval(() => {
                             const img = document.getElementById('detected-frame');
                             const userId = <?= $_SESSION['user_id'] ?>;
-                            img.src = `http://10.30.94.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            img.src = `http://10.158.251.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
                         }, 5000);
                     </script>
 
