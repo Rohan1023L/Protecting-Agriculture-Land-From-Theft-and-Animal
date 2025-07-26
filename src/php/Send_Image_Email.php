@@ -84,12 +84,12 @@ try {
     $mail->addAddress($user['email'], $user['name']);
 
     $mail->isHTML(true);
-    $mail->Subject = 'New Image Captured';
+    $mail->Subject = 'ALERT NOTIFICATION FROM PALFAT';
     $mail->Body = "
 
     <div style='font-family: 'Josefin Sans', sans-serif;font-size:14px;'>
         <b>Hello <u>{$user['name']}</u>,</b>
-        <p>Someone entered in your farm at :
+        <p>Someone entered in your farm at : <br>
          <strong>$capturedAtFormatted</strong>.</p>
         <p>This is the picture of human/animal :</p>
         <img src='cid:capturedImage' width='300'/>
@@ -97,7 +97,7 @@ try {
         <br>
         <p>Stay alert and safe!</p>
 
-        <b>Security Alert from,<b>
+        <b>Security Alert from,</b>
         <br>
        <u> Team DSY </u>
      </div>
