@@ -4,7 +4,7 @@ session_start();
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../lib/vendor/autoload.php'; // Use Composer or manual PHPMailer
+require '../lib/Email/vendor/autoload.php'; 
 
 // DB credentials
 $host = 'localhost';

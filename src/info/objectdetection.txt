@@ -1,5 +1,3 @@
-
-
 from flask import Flask, Response, send_file, request, jsonify
 from ultralytics import YOLO
 import cv2
@@ -148,7 +146,7 @@ def detect_objects():
                     # 🚨 Send alert to Raspberry Pi if specific objects are detected
                     if label in ["person", "dog", "cow"]:
                         try:
-                            alert_url = "http://10.158.251.182:5000/alert"
+                            alert_url = "http://10.56.242.182:5000/alert"
                             requests.post(alert_url, data={"type": label})
                             print(f"[ALERT] Sent alert to Raspberry Pi for {label}")
                         except Exception as e:
@@ -274,4 +272,5 @@ def get_latest_frame():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=False, threaded=True)
+
 

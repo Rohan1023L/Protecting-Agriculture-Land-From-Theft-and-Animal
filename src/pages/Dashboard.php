@@ -143,10 +143,19 @@ $base_url = "../upload/capture/";
 
                 <div>
                     <div class="control-hardware-navigation">
-                        <a href="#index-live">live farm view</a>
+                        <a href="#index-live" class="active">live farm view</a>
                         <a href="#index-voice">voice massage</a>
                         <a href="#index-img">camera images [ by ai ]</a>
                     </div>
+                    <script>
+                        const HL = document.querySelectorAll(".control-hardware-navigation a");
+                        HL.forEach(link => {
+                            link.addEventListener("click", function() {
+                                HL.forEach(l => l.classList.remove("active"));
+                                this.classList.add("active");
+                            });
+                        });
+                    </script>
                 </div>
             </div>
         </form>
@@ -172,14 +181,21 @@ $base_url = "../upload/capture/";
 
                     <div class="detected-img">
                         <img id="detected-frame"
-                            src="http://10.158.251.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
+                            src="http://10.56.242.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
+
+                        <div class="live-stream-navigation">
+                            <p>Live Stream Navigation</p>
+                            <div class="navigation-of-stream">
+                                <div><i class="fa-solid fa-expand"></i></div>
+                            </div>
+                        </div>
                     </div>
 
                     <script>
                         setInterval(() => {
                             const img = document.getElementById('detected-frame');
                             const userId = <?= $_SESSION['user_id'] ?>;
-                            img.src = `http://10.158.251.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            img.src = `http://10.56.242.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
                         }, 5000);
                     </script>
 
@@ -233,7 +249,7 @@ $base_url = "../upload/capture/";
                         </div>
                         <?php
                         if (!$result_images || $result_images->num_rows === 0) {
-                            echo '<div style="height:40px;display:flex;align-items:center;justify-content:center;">No captured images found.</div>';
+                            echo '<div style="height:40px;display:flex;align-items:center;justify-content:center;border: 1px solid black;margin-left:20px;margin-right:22px;">No captured images found.</div>';
                         } else {
                             $sr_no = 1;
                             $base_url = "../upload/capture/";
@@ -263,7 +279,7 @@ $base_url = "../upload/capture/";
                                             <div class="button-arrangment-for-url">
                                                 <a href="<?= htmlspecialchars($full_img_url) ?>" target="_blank">
                                                     <button type="button" id="button-for-url"> <i class="fa-solid fa-eye"></i>&nbsp;View Image</button>
-                                                   
+
                                                 </a>
                                             </div>
 

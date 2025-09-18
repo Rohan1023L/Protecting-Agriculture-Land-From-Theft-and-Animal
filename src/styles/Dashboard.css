@@ -63,14 +63,15 @@ form {
 .user-profile {
     margin-top: 15px;
     margin-left: 20px;
-    height: 110px;
+    border-radius: 50%;
+    height: 105px;
     width: 105px;
     border: 1px solid black;
     border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 
 .user-details-n-e-p {
@@ -124,7 +125,6 @@ form {
 }
 
 .control-hardware-navigation>a:hover,
-.control-hardware-navigation>a:active,
 .control-hardware-navigation>a:focus {
     margin: 6px;
     padding-block: 12px;
@@ -138,6 +138,12 @@ form {
     cursor: pointer;
     text-transform: uppercase;
     text-align: left;
+}
+
+.control-hardware-navigation a.active {
+    border: 5px solid transparent;
+    border-left-color: #3456AB;
+    color: black;
 }
 
 aside {
@@ -166,6 +172,44 @@ aside {
     width: 89%;
     margin-left: 20px;
 }
+
+.live-stream-navigation {
+    margin-left: 10px;
+    margin-top: 10px;
+
+}
+
+
+.navigation-of-stream {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+.navigation-of-stream div {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    padding: 10px;
+    cursor: pointer;
+    transition: box-shadow .15s, transform .15s;
+    will-change: box-shadow, transform;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+.navigation-of-stream div:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.navigation-of-stream div:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
 
 .create-account-box {
     margin-right: 10px;
