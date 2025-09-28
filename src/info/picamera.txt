@@ -1,15 +1,28 @@
-PROGRAM CODE :
 from picamera2 import Picamera2
 import cv2
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
+import shutil
+import psutil
+from flask_cors import CORS 
+import os
 
 app = Flask(__name__)
+CORS(app)
 
-picam2 = Picamera2()
-picam2.start()
+# ---------------- Camera Section ----------------
+try:
+    picam2 = Picamera2()
+    picam2.start()
+    camera_connected = True
+except Exception as e:
+    print("Camera not connected:", e)
+    picam2 = None
+    camera_connected = False
 
 def generate_frames():
     while True:
+        if not camera_connected:
+            break
         frame = picam2.capture_array()
         ret, buffer = cv2.imencode('.jpg', frame)
         frame_bytes = buffer.tobytes()
@@ -18,20 +31,55 @@ def generate_frames():
 
 @app.route('/PALFAT')
 def video_feed():
-    return Response(generate_frames(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+    if camera_connected:
+        return Response(generate_frames(),
+                        mimetype='multipart/x-mixed-replace; boundary=frame')
+    else:
+        return "Camera not connected", 503
 
 @app.route('/')
 def index():
     return '''
     <html><body>
     <h1>Pi Camera Live Stream</h1>
-    <img src="/video_feed" width="640" height="480" />
+    <img src="/PALFAT" width="640" height="480" />
     </body></html>
     '''
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+# ---------------- Camera Connected or Not------------
+@app.route("/camera_status")
+def camera_status():
+    return jsonify({"connected": camera_connected}) 
 
-PROGRAM HOST LINK :
-http://10.30.94.182:5000/PALFAT
+# ---------------- Temperature Section ----------------
+@app.route("/temperature")
+def temperature():
+    temp = os.popen("vcgencmd measure_temp").readline().replace("temp=","").strip()
+    return jsonify({"temperature": temp})
+
+#------------------ SD Card Details ----------------------
+@app.route("/storage")
+def storage():
+    total, used, free = shutil.disk_usage("/")
+    return jsonify({
+        "total_GB": round(total / (1024**3), 2),
+        "used_GB": round(used / (1024**3), 2),
+        "free_GB": round(free / (1024**3), 2)
+    })
+    
+# ------------------ Storage Ram ---------------------------
+@app.route("/ram")
+def ram_usage():
+    mem = psutil.virtual_memory()
+    return jsonify({
+        "total_GB": round(mem.total / (1024**3), 2),
+        "used_GB": round(mem.used / (1024**3), 2),
+        "free_GB": round(mem.available / (1024**3), 2),
+        "percent_used": mem.percent
+    })
+
+
+# ---------------- Main ----------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+

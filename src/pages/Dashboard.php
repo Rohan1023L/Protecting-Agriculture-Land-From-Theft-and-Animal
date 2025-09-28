@@ -80,6 +80,8 @@ $result_images = $conn->query($sql_images);
 
 $base_url = "../upload/capture/";
 
+$raspi_ip = $user['stream_link'];
+
 ?>
 
 
@@ -93,6 +95,7 @@ $base_url = "../upload/capture/";
     <title>Protecting Agriculture Land From Animals/Theft | User Details</title>
     <link rel="stylesheet" href="../styles/Dashboard.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
@@ -114,6 +117,7 @@ $base_url = "../upload/capture/";
                     </div>
                 </div>
 
+                <div class="line-for-bottom"></div>
                 <div class="user-profile-management">
                     <br>
                     <div>
@@ -140,13 +144,14 @@ $base_url = "../upload/capture/";
                         <div id="heading-subtitle">SELECT YOUR NEEDS</div>
                     </div>
                 </div>
-
+                <div class="line-for-bottom"></div>
                 <div>
                     <div class="control-hardware-navigation">
                         <a href="#index-live" class="active">live farm view</a>
                         <a href="#index-voice">voice massage</a>
                         <a href="#index-img">camera images [ by ai ]</a>
                     </div>
+
                     <script>
                         const HL = document.querySelectorAll(".control-hardware-navigation a");
                         HL.forEach(link => {
@@ -171,23 +176,59 @@ $base_url = "../upload/capture/";
                         <div id="heading-subtitle">HERE YOU EXPLORE THE FARM.</div>
                     </div>
                 </div>
-
+                <div class="line-for-bottom"></div>
                 <div class="live-stream-video">
 
                     <div class="live-video-footage">
-                        <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>" />
+                        <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>"
+                            onerror="this.onerror=null; this.src='../assets/images/VGA-no-signal-image.jpg'; document.getElementById('liveStatus').innerText='No Signal';" />
                         <!--Laptop Ip-->
                     </div>
 
                     <div class="detected-img">
                         <img id="detected-frame"
-                            src="http://10.56.242.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
+                            src="http://10.245.155.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>"
+                            onerror="this.onerror=null; this.src='../assets/images/VGA-no-signal-image.jpg'; document.getElementById('detectedStatus').innerText='No Signal';" />
+                        <!--Laptop Ip-->
 
-                        <div class="live-stream-navigation">
-                            <p>Live Stream Navigation</p>
-                            <div class="navigation-of-stream">
-                                <div><i class="fa-solid fa-expand"></i></div>
+                        <div class="raspberrypi-information">
+                            <div class="create-account-heading" style="padding-bottom:0px;margin-left:0px;margin-top:0px">
+                                <div class="heading-title-subtitle" style="display: flex;gap:10px;justify-content:center;">
+                                    <div><i class="fa-brands fa-raspberry-pi" style="padding-top:5px;font-size: 24px;color: #c51a4a;"></i></div>
+                                    <div>
+                                        <div id="heading-title"><b>RASPBBERY PI 4 B</b></div>
+                                        <div id="heading-subtitle">DETAILS INFORMATION OF RASPBBERY PI.</div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="line-for-bottom" style="margin-inline: 0px;width: 98%;"></div>
+                            <div class="raspberrypi-component-information">
+                                <div class="sd-card">
+                                    <span id="sd-card-space"> <i class="fa-solid fa-camera-retro" style="color: #9575CD;"></i> </span>
+                                    <span id="sd-card-details">
+                                        <span id="camera-status">Checking...</span>
+                                    </span>
+                                </div>
+
+                                <div class="sd-card">
+                                    <span id="sd-card-space"><i class="fa-solid fa-temperature-low" style="color: #4DB6AC;font-size:20px"></i> </span>
+                                    <span id="temp" style="color: #3A434D;"> Loading... </span>
+                                </div>
+                                <div class="sd-card">
+                                    <span id="sd-card-space"> <i class="fa-solid fa-sd-card" style="color:#4FC3F7;"></i> </span>
+                                    <span id="sd-card-details">
+                                        <span><span id="total">Loading...</span> / <span id="sd-free">Loading...</span> GB</span>
+                                    </span>
+                                </div>
+                                <div class="sd-card">
+                                    <span id="sd-card-space"> <i class="fa-solid fa-memory" style="color:#F44336;"></i> </span>
+                                    <span id="sd-card-details">
+                                        <span><span id="ram-total">Loading...</span> / <span id="ram-free">Loading...</span> </span>
+                                    </span>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -195,7 +236,8 @@ $base_url = "../upload/capture/";
                         setInterval(() => {
                             const img = document.getElementById('detected-frame');
                             const userId = <?= $_SESSION['user_id'] ?>;
-                            img.src = `http://10.56.242.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            img.src = `http://10.245.155.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            // laptop ip
                         }, 5000);
                     </script>
 
@@ -213,7 +255,7 @@ $base_url = "../upload/capture/";
                         <div id="heading-subtitle">SEND ALERT TO THE ANIMAL/THEFT.</div>
                     </div>
                 </div>
-
+                <div class="line-for-bottom"></div>
                 <div class="text-propmt">
                     <textarea id="output-text" placeholder="Type something or use mic" rows="4"></textarea>
                     <br>
@@ -231,8 +273,9 @@ $base_url = "../upload/capture/";
                             <div id="heading-title"><b>CAMERA IMAGES [ BY AI ]</b></div>
                             <div id="heading-subtitle">ACTIVITY THAT’S CAPTURED IN CAMERA</div>
                         </div>
-                    </div>
 
+                    </div>
+                    <div class="line-for-bottom"></div>
                     <div class="ai-captured-images">
                         <div class="table-ai-captured-img">
                             <div class="sr-img">
@@ -310,7 +353,15 @@ $base_url = "../upload/capture/";
     <footer>
         © 2025 TEAM DSY, Protecting Agriculture Land From Animals/Theft.<br>All Rights Reserved.
     </footer>
+    <script>
+        window.RASPI_IP = "<?php echo $raspi_ip; ?>";
+    </script>
     <script src="../utils/Text_Translation.js"></script>
+    <script src="../utils/Live_Temprature.js"></script>
+    <script src="../utils/SDMemory_Details.js"></script>
+    <script src="../utils/Details_of_Camera.js"></script>
+    <script src="../utils/Ram_Details.js"></script>
+
 </body>
 
 </html>

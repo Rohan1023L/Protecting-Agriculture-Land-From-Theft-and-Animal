@@ -11,3 +11,15 @@ WIFI Credential
 Username : POCO M2
 Password : Rohan1023L
 
+Run Command
+-------------------------
+Laptop ->
+cd src
+cd python
+python object_detection.py
+
+RaspberryPi ->
+cd ~/Project
+source ~/pi-env/bin/activate
+
+

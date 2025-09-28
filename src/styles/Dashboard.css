@@ -64,8 +64,8 @@ form {
     margin-top: 15px;
     margin-left: 20px;
     border-radius: 50%;
-    height: 105px;
-    width: 105px;
+    height: 80px;
+    width: 80px;
     border: 1px solid black;
     border-radius: 10px;
     -webkit-border-radius: 50%;
@@ -118,10 +118,7 @@ form {
     cursor: pointer;
     text-transform: uppercase;
     text-align: left;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+
 }
 
 .control-hardware-navigation>a:hover,
@@ -168,48 +165,41 @@ aside {
 .create-account-heading {
     display: flex;
     border: 2px solid transparent;
-    border-bottom-color: black;
-    width: 89%;
+    width: 90%;
     margin-left: 20px;
 }
 
-.live-stream-navigation {
+
+.line-for-bottom {
+    border: 2px solid transparent;
+    border-bottom-color: black;
+    margin-inline: 20px;
+}
+
+.raspberrypi-information {
     margin-left: 10px;
     margin-top: 10px;
 
 }
 
 
-.navigation-of-stream {
-    margin-top: 4px;
+.sd-card {
+    margin-top: 7px;
     display: flex;
     align-items: center;
-    height: 60px;
+    justify-content: left;
+    margin-right: 22px;
+    font-size: 15px;
+
 }
 
-.navigation-of-stream div {
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-    padding: 10px;
-    cursor: pointer;
-    transition: box-shadow .15s, transform .15s;
-    will-change: box-shadow, transform;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
+.sd-card #sd-card-space {
+    margin-right: 8px;
 }
 
-.navigation-of-stream div:focus {
-    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+#sd-card-details {
+    color: #3A434D;
 }
-
-.navigation-of-stream div:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
-    transform: translateY(-2px);
-}
-
 
 .create-account-box {
     margin-right: 10px;
@@ -314,17 +304,23 @@ aside {
 
 
 .live-stream-video .live-video-footage {
-    height: 450px;
-    width: 550px;
+    height: 420px;
+    width: 560px;
     padding: 0;
+    border: 1px solid black;
 }
 
 .detected-img #detected-frame {
-    height: 300px;
-    width: 430px;
+    height: 325px;
+    width: 436px;
     margin-left: 10px;
+    border: 1px solid black;
+
 }
 
+.raspberrypi-component-information {
+    display: flex;
+}
 
 .live-stream-video .live-video-footage img {
     width: 100%;
