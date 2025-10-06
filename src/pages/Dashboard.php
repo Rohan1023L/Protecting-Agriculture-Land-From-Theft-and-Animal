@@ -181,14 +181,14 @@ $raspi_ip = $user['stream_link'];
 
                     <div class="live-video-footage">
                         <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>"
-                            onerror="this.onerror=null; this.src='../assets/images/VGA-no-signal-image.jpg'; document.getElementById('liveStatus').innerText='No Signal';" />
+                            onerror="this.onerror=null; this.src='../assets/images/camear-loading-screen.gif'; document.getElementById('liveStatus').innerText='No Signal';" />
                         <!--Laptop Ip-->
                     </div>
 
                     <div class="detected-img">
                         <img id="detected-frame"
                             src="http://10.245.155.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>"
-                            onerror="this.onerror=null; this.src='../assets/images/VGA-no-signal-image.jpg'; document.getElementById('detectedStatus').innerText='No Signal';" />
+                            onerror="this.onerror=null; this.src='../assets/images/8b3215c7ee7dbd5e33b36383a83a04b7.gif'; document.getElementById('detectedStatus').innerText='No Signal';" />
                         <!--Laptop Ip-->
 
                         <div class="raspberrypi-information">
