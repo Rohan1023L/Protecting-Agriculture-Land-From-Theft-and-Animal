@@ -52,15 +52,23 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("ssssss", $name, $mobile, $email, $stream_link, $hashed_password, $image_path);
 
 if ($stmt->execute()) {
-    $user_id = $stmt->insert_id; 
+    $user_id = $stmt->insert_id;
 
     $table_name = "captured_images_user_" . $user_id;
+    // $create_table_sql = "CREATE TABLE `$table_name` (
+    //     id INT AUTO_INCREMENT PRIMARY KEY,
+    //     image_path VARCHAR(255) NOT NULL,
+    //     captured_image LONGBLOB,
+    //     captured_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    // ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
     $create_table_sql = "CREATE TABLE `$table_name` (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        image_path VARCHAR(255) NOT NULL,
-        captured_image LONGBLOB,
-        captured_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_path VARCHAR(255) NOT NULL,
+    object_name VARCHAR(50) NOT NULL, 
+    captured_image LONGBLOB,
+    captured_at DATETIME DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
 
     if (!$conn->query($create_table_sql)) {
         die("Failed to create user image table: " . $conn->error);
@@ -77,4 +85,3 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
-?>

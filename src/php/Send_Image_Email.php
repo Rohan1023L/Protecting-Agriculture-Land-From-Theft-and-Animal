@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\Exception;
 
 require '../lib/Email/vendor/autoload.php'; 
 
-// DB credentials
 $host = 'localhost';
 $user = 'root';
 $password = '';
@@ -17,7 +16,6 @@ if ($conn->connect_error) {
     die("DB Error: " . $conn->connect_error);
 }
 
-// Validate POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['user_id'])) {
     http_response_code(400);
     echo "Invalid request.";
@@ -27,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['user_id'])) {
 $userId = (int)$_POST['user_id'];
 $table_name = "captured_images_user_" . $userId;
 
-// Fetch user info
 $stmt = $conn->prepare("SELECT name, email FROM user_profile WHERE id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
@@ -40,8 +37,7 @@ if (!$user) {
     exit();
 }
 
-// Fetch last captured image
-$sql = "SELECT image_path, captured_at FROM `$table_name` ORDER BY captured_at DESC LIMIT 1";
+$sql = "SELECT image_path, object_name, captured_at FROM `$table_name` ORDER BY captured_at DESC LIMIT 1";
 $result = $conn->query($sql);
 if ($result->num_rows === 0) {
     echo "No images found.";
@@ -51,30 +47,25 @@ if ($result->num_rows === 0) {
 $row = $result->fetch_assoc();
 $imagePath = $row['image_path'];
 $capturedAt = $row['captured_at'];
+$objectName = $row['object_name'] ?? ''; 
+$objectName = implode(', ', array_map('ucfirst', explode(',', $objectName)));
 
-// Format captured time to 12-hour format with AM/PM
 $capturedAtFormatted = date("d/m/Y h:i:s A", strtotime($capturedAt));
 
-// Normalize path slashes
 $imagePath = str_replace("\\", "/", $imagePath);
 
-// Get absolute path
 $absolutePath = realpath(__DIR__ . '/../upload/' . $imagePath);
 
-// Check if file exists
 if (!$absolutePath || !file_exists($absolutePath)) {
     echo "File not found: " . (__DIR__ . '/../upload/' . $imagePath);
     exit();
 }
 
-// Send email
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-
-    // 🔐 Use App Password for Gmail
     $mail->Username = 'protectingagriculture@gmail.com';
     $mail->Password = 'ixdqeytmfaatljej';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -87,13 +78,13 @@ try {
     $mail->Subject = 'ALERT NOTIFICATION FROM PALFAT';
     $mail->Body = "
 
-    <div style='font-family: 'Josefin Sans', sans-serif;font-size:14px;'>
+    <div style='font-family: \"Josefin Sans\", sans-serif;font-size:14px;'>
         <b>Hello <u>{$user['name']}</u>,</b>
-        <p>Someone entered in your farm at : <br>
+        <p> A <strong style='color:red;'>{$objectName}</strong> entered in your farm at : <br>
          <strong>$capturedAtFormatted</strong>.</p>
-        <p>This is the picture of human/animal :</p>
+        <p>This is the picture of {$objectName} :</p>
         <img src='cid:capturedImage' width='300'/>
-        <p>If the captured image includes a human and you are not able to recognize them, you can use our voice message system to protect your farm. </p>
+        <p>If the captured image includes a person and you are not able to recognize them, you can use our voice message system to protect your farm. </p>
         <br>
         <p>Stay alert and safe!</p>
 

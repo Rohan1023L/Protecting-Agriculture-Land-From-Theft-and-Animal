@@ -180,15 +180,13 @@ $raspi_ip = $user['stream_link'];
                 <div class="live-stream-video">
 
                     <div class="live-video-footage">
-                        <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>"
-                            onerror="this.onerror=null; this.src='../assets/images/camear-loading-screen.gif'; document.getElementById('liveStatus').innerText='No Signal';" />
+                        <img id="liveStreamFrame" src="http://localhost:5001/live?user_id=<?php echo $_SESSION['user_id']; ?>" />
                         <!--Laptop Ip-->
                     </div>
 
                     <div class="detected-img">
                         <img id="detected-frame"
-                            src="http://10.245.155.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>"
-                            onerror="this.onerror=null; this.src='../assets/images/8b3215c7ee7dbd5e33b36383a83a04b7.gif'; document.getElementById('detectedStatus').innerText='No Signal';" />
+                            src="http://10.105.59.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
                         <!--Laptop Ip-->
 
                         <div class="raspberrypi-information">
@@ -207,24 +205,24 @@ $raspi_ip = $user['stream_link'];
                                 <div class="sd-card">
                                     <span id="sd-card-space"> <i class="fa-solid fa-camera-retro" style="color: #9575CD;"></i> </span>
                                     <span id="sd-card-details">
-                                        <span id="camera-status">Checking...</span>
+                                        <span id="camera-status">...</span>
                                     </span>
                                 </div>
 
                                 <div class="sd-card">
                                     <span id="sd-card-space"><i class="fa-solid fa-temperature-low" style="color: #4DB6AC;font-size:20px"></i> </span>
-                                    <span id="temp" style="color: #3A434D;"> Loading... </span>
+                                    <span id="temp" style="color: #3A434D;"> ... </span>
                                 </div>
                                 <div class="sd-card">
                                     <span id="sd-card-space"> <i class="fa-solid fa-sd-card" style="color:#4FC3F7;"></i> </span>
                                     <span id="sd-card-details">
-                                        <span><span id="total">Loading...</span> / <span id="sd-free">Loading...</span> GB</span>
+                                        <span><span id="total">...</span> / <span id="sd-free">...</span> GB</span>
                                     </span>
                                 </div>
                                 <div class="sd-card">
                                     <span id="sd-card-space"> <i class="fa-solid fa-memory" style="color:#F44336;"></i> </span>
                                     <span id="sd-card-details">
-                                        <span><span id="ram-total">Loading...</span> / <span id="ram-free">Loading...</span> </span>
+                                        <span><span id="ram-total">...</span> / <span id="ram-free">...</span> </span>
                                     </span>
                                 </div>
                             </div>
@@ -236,7 +234,7 @@ $raspi_ip = $user['stream_link'];
                         setInterval(() => {
                             const img = document.getElementById('detected-frame');
                             const userId = <?= $_SESSION['user_id'] ?>;
-                            img.src = `http://10.245.155.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            img.src = `http://10.105.59.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
                             // laptop ip
                         }, 5000);
                     </script>
@@ -263,6 +261,26 @@ $raspi_ip = $user['stream_link'];
                         <div class="i"> <i id="mic-icon" class="fa-solid fa-microphone-slash"></i></div><button id="text-propmt-button">Send</button>
                     </div>
                 </div>
+
+                <script>
+                    document.getElementById("text-propmt-button").addEventListener("click", () => {
+                        const msg = document.getElementById("output-text").value.trim();
+                        if (!msg) return alert("Please type a message");
+
+                        fetch("http://<?php echo $raspi_ip; ?>:5000/speak", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    message: msg
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => console.log("Spoken:", data))
+                            .catch(err => console.error(err));
+                    });
+                </script>
 
                 <div class="camera-captured-images" id="index-img">
                     <div class="create-account-heading">

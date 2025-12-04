@@ -109,7 +109,7 @@ main .help-part-one ul u {
 }
 
 main .help-part-one ul li {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 16px;
 
   margin-inline: 30px;
@@ -118,4 +118,18 @@ main .help-part-one ul li {
 
 main .help-part-two {
   width: 70%;
+}
+
+.Heading-of-help-page {
+  margin: 20px;
+  border: 1px solid red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.Description-help-page {
+  margin: 20px;
+  border: 1px solid red;
+  font-size: 16px;
+  text-align: justify;
 }

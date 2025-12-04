@@ -310,6 +310,10 @@ aside {
     border: 1px solid black;
 }
 
+.detected-img {
+   width: 490px;
+}
+
 .detected-img #detected-frame {
     height: 325px;
     width: 94%;
