@@ -2,8 +2,7 @@
   Protecting Agriculture Land From Animals/Theft
 
 # Project Overview
-  1. Web-based monitoring system.
-  2. It protect the agriculture land from unwelcome attacks (Animals/Theft) by using Project Features.
+  Web-based monitoring system. security guard for the farmer to protect the agriculture land from unwelcome attacks (Animals/Theft) by using Project Features.
 
 # Project Features
   1. Alert Notification ( user device )
@@ -21,9 +20,9 @@
   7. CAMERA MODULE 5MP OR 8MP
 
 # Project Languages
-  1. Front-End : HTML, CSS, JAVASCRIPT
+  1. Front-End : HTML, CSS
   2. Back-End  : Python, Javascript
-  3. DBMS      : MySQL (XAMPP), FireBase
+  3. DBMS      : MySQL (XAMPP)
 
 # Project Libraries
  1. flask (Hosting Live Stream In browser)
@@ -32,6 +31,20 @@
  4. v4lutils (for checking device compatibility)
  5. ultralytics (for object detection)
  6. PHP Mailer
+
+# Project Execution
+
+Laptop
+-----------------------------
+cd src
+cd python
+python object_detection.py
+
+RaspberryPi
+------------------------------
+cd ~/Project
+source ~/pi-env/bin/activate
+python3 raspberry_pi.py
 
 # Project Team Members
   1. Akshay P. Badalwar

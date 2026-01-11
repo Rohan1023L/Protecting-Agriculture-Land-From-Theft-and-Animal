@@ -155,6 +155,7 @@ form {
 }
 
 .create-account-box {
+
     margin-right: 10px;
     height: 15px;
     width: 16px;
@@ -164,6 +165,27 @@ form {
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
+}
+
+.all-card {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#create-account-image {
+    height: 460px;
+    width: 580px;
+}
+
+
+.slogon-for-all-card {
+        padding-block: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 

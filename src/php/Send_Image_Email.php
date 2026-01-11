@@ -66,8 +66,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'protectingagriculture@gmail.com';
-    $mail->Password = 'ixdqeytmfaatljej';
+    $mail->Username = 'xxxxxxxxx@gmail.com'; // gmail
+    $mail->Password = 'xxxxxxxxxxxxxxxxxxx'; // 2FA
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 

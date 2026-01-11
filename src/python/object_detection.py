@@ -11,32 +11,27 @@ import requests
 
 app = Flask(__name__)
 
-# Load YOLO model
 model = YOLO("yolov8n.pt")
 LABELS = model.model.names
 
-# Snapshot storage folder
 snapshot_dir = "../upload/capture"
 os.makedirs(snapshot_dir, exist_ok=True)
 
-# Globals
 current_frame = None
 last_detections = []
 last_saved_time = 0
 lock = threading.Lock()
 frame_skip = 2
 min_area = 3000
-save_interval = 5 # seconds
+save_interval = 5 
 last_email_sent_time = 0
-email_interval = 30  # seconds
+email_interval = 30 
 
-# MySQL config
 DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_PASSWORD = ''
 DB_NAME = 'protecting_agriculture_land_form_thef_animal'
 
-# Runtime globals
 detection_started = False
 current_user_id = None
 cap = None
@@ -56,8 +51,8 @@ def get_user_stream_link(user_id):
         conn.close()
 
         if result and result[0]:
-            ip_only = result[0]  # assuming the DB only has "10.245.155.182"
-            full_link = f"http://{ip_only}:5000/PALFAT"  # construct full URL
+            ip_only = result[0] 
+            full_link = f"http://{ip_only}:5000/PALFAT"  
             return full_link
         else:
             print(f"[ERROR] No stream link found for user_id {user_id}")
@@ -65,56 +60,6 @@ def get_user_stream_link(user_id):
     except Exception as e:
         print(f"[DB ERROR] Failed to fetch stream link: {e}")
         return None
-
-
-# def insert_captured_image_to_db(image_path, object_name):
-#     global current_user_id, last_email_sent_time
-
-#     if not current_user_id:
-#         print("[ERROR] No user_id set for this request")
-#         return
-
-#     table_name = f"captured_images_user_{current_user_id}"
-
-#     try:
-#         with open(image_path, "rb") as f:
-#             img_blob = f.read()
-
-#         conn = mysql.connector.connect(
-#             host=DB_HOST,
-#             user=DB_USER,
-#             password=DB_PASSWORD,
-#             database=DB_NAME
-#         )
-#         cursor = conn.cursor()
-
-#         sql = f"INSERT INTO `{table_name}` (image_path, captured_image, captured_at) VALUES (%s, %s, NOW())"
-#         relative_path = os.path.relpath(image_path, start=os.path.dirname(snapshot_dir))
-#         cursor.execute(sql, (relative_path, img_blob))
-
-#         conn.commit()
-#         cursor.close()
-#         conn.close()
-#         print(f"[DB] Inserted image with blob into {table_name}: {relative_path}")
-
-#         now = time.time()
-#         if now - last_email_sent_time >= email_interval:
-#             try:
-#                 php_url = "http://localhost/Web Project/Protecting-Agriculture-Land-From-Theft-and-Animal/src/php/Send_Image_Email.php"
-#                 post_data = {"user_id": current_user_id}
-#                 response = requests.post(php_url, data=post_data)
-#                 print(f"[EMAIL] PHP Response: {response.text}")
-#                 last_email_sent_time = now  
-#             except Exception as e:
-#                 print(f"[EMAIL ERROR] {e}")
-#         else:
-#             print(f"[EMAIL] Skipped: Waiting {int(email_interval - (now - last_email_sent_time))}s before next email.")
-
-#     except mysql.connector.Error as err:
-#         print(f"[DB ERROR] Failed to insert image: {err}")
-#     except Exception as e:
-#         print(f"[ERROR] {e}")
-
 
 def insert_captured_image_to_db(image_path, object_name):
     global current_user_id, last_email_sent_time
@@ -129,7 +74,6 @@ def insert_captured_image_to_db(image_path, object_name):
         with open(image_path, "rb") as f:
             img_blob = f.read()
 
-        # Convert list of labels to comma string
         if isinstance(object_name, list):
             object_name = ",".join(object_name)
 
@@ -144,7 +88,6 @@ def insert_captured_image_to_db(image_path, object_name):
         )
         cursor = conn.cursor()
 
-        # 🚀 UPDATED QUERY (added object_name column)
         sql = f"""
             INSERT INTO `{table_name}` 
             (image_path, captured_image, object_name, captured_at) 
@@ -160,7 +103,6 @@ def insert_captured_image_to_db(image_path, object_name):
 
         print(f"[DB] Inserted image into {table_name} with object name: {object_name}")
 
-        # EMAIL LOGIC NO CHANGE BELOW
         now = time.time()
         if now - last_email_sent_time >= email_interval:
             try:
@@ -179,7 +121,6 @@ def insert_captured_image_to_db(image_path, object_name):
     except Exception as e:
         print(f"[ERROR] {e}")
 
-
 def detect_objects():
     global current_frame, last_detections, last_saved_time, cap
     frame_count = 0
@@ -189,7 +130,6 @@ def detect_objects():
             time.sleep(0.1)
             continue
 
-        # Flush stale frames to reduce latency
         for _ in range(5):
             cap.grab()
 
@@ -214,10 +154,9 @@ def detect_objects():
                     cls_id = int(box.cls[0])
                     label = LABELS.get(cls_id, "object")
 
-                    # 🚨 Send alert to Raspberry Pi if specific objects are detected
                     if label in ["person", "cow", "buffalo", "goat", "sheep", "pig", "horse", "deer", "rabbit", "wild_boar", "monkey", "elephant", "camel", "nilgai", "porcupine", "rat", "squirrel", "peacock", "bird", "parrot", "crow", "pigeon", "wild_duck"]:
                         try:
-                            alert_url = "http://10.105.59.182:5000/alert"  # raspberry ip
+                            alert_url = "http://xx.xx.xxx.xxx:5000/alert"  # raspberry ip
                             requests.post(alert_url, data={"type": label})
                             print(f"[ALERT] Sent alert to Raspberry Pi for {label}")
                         except Exception as e:
@@ -229,7 +168,6 @@ def detect_objects():
 
                     last_detections.append((x1, y1, x2, y2, label))
 
-                # ----------------- Save frame and insert into DB -----------------
                 if time.time() - last_saved_time > save_interval:
                     timestamp_for_file = datetime.now().strftime("%d%m%Y_%H%M%S")
                     filename = f"detected_{timestamp_for_file}.jpg"
@@ -251,13 +189,11 @@ def detect_objects():
                     cv2.imwrite(latest_frame_path, clean_frame)
                     last_saved_time = time.time()
 
-                    # <-- NEW: get detected labels and insert into DB
                     detected_labels = [label for _, _, _, _, label in last_detections]
                     objects_str = ",".join(detected_labels) if detected_labels else "unknown"
                     print(f"[DEBUG] Labels to insert into DB: {detected_labels} or {objects_str}")
                     insert_captured_image_to_db(latest_frame_path, detected_labels)
 
-        # Draw rectangles and labels on live stream
         for x1, y1, x2, y2, label in last_detections:
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.putText(frame, label, (x1, y1 - 10),
@@ -268,7 +204,7 @@ def detect_objects():
 
 def generate_stream():
     global current_frame
-    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]  # Faster encoding
+    encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 70]
 
     while True:
         with lock:
@@ -297,7 +233,7 @@ def video_feed():
     current_user_id = user_id
 
     cap = cv2.VideoCapture(stream_link)
-    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # Reduce latency
+    cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)  
 
     if not cap.isOpened():
         return "Failed to open video stream", 500

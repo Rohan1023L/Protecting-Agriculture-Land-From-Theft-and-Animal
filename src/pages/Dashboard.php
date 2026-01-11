@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete_id'])) {
     $stmt->execute();
     $stmt->bind_result($imagePath);
     $stmt->fetch();
-    $stmt->close();
+    $stmt->close(); 
 
     // Delete image file from disk
     if ($imagePath) {
@@ -186,7 +186,7 @@ $raspi_ip = $user['stream_link'];
 
                     <div class="detected-img">
                         <img id="detected-frame"
-                            src="http://10.105.59.70:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
+                            src="http://xx.xx.xxx.xx:5001/latest?user_id=<?= $_SESSION['user_id'] ?>&rand=<?= time() ?>" />
                         <!--Laptop Ip-->
 
                         <div class="raspberrypi-information">
@@ -234,7 +234,7 @@ $raspi_ip = $user['stream_link'];
                         setInterval(() => {
                             const img = document.getElementById('detected-frame');
                             const userId = <?= $_SESSION['user_id'] ?>;
-                            img.src = `http://10.105.59.70:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
+                            img.src = `http://xx.xx.xxx.xx:5001/latest?user_id=${userId}&rand=${new Date().getTime()}`;
                             // laptop ip
                         }, 5000);
                     </script>
