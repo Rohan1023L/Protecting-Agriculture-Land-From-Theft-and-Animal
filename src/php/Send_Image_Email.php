@@ -71,7 +71,7 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    $mail->setFrom('protectingagriculture@gmail.com', 'Protecting Agriculture Land From Animals/Theft');
+    $mail->setFrom('xxxxxxxxxx@gmail.com', 'Protecting Agriculture Land From Animals/Theft');
     $mail->addAddress($user['email'], $user['name']);
 
     $mail->isHTML(true);
